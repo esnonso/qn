@@ -1,0 +1,45 @@
+.sidebar {
+  margin: 0;
+  padding: 0.5rem 0.8rem;
+  left:40%;
+  width: 60%;
+  background-color: white;
+  height: 100%;
+  position: fixed;
+  overflow: auto;
+  top: 5rem;
+  z-index: 4;
+}
+
+/* Sidebar links */
+.sidebar a {
+  display: block;
+  color: black;
+  padding: 0.2rem 16px;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.sidebar h3 {
+  border-top: 1px black solid;
+  border-bottom: 1px black solid;
+}
+
+.backdrop{
+  background-color: black;
+  z-index: 3;
+  height: 100%;
+  position: fixed;
+  width: 100%;
+  top: 5rem;
+  opacity: 0.9;
+  color: white;
+}
+
+/* MEDIA-QUERIES */
+@media only screen and (min-width: 800px) {
+  /* For desktop: */
+  .sidebar {
+    display: none;
+  }
+}
