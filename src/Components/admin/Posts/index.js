@@ -4,7 +4,7 @@ import MobileNavigation from "../MobileNavigator";
 import Image from "../../Images/profile.png";
 import "./index.css";
 
-const Header = ({ textColor, list, color, position, image }) => {
+const Posts = ({ textColor, list, color, position, image }) => {
   const [sidebar, showSideBar] = useState(false);
 
   const showSideBarHandler = () => showSideBar((prevState) => !prevState);
@@ -36,7 +36,7 @@ const Header = ({ textColor, list, color, position, image }) => {
           <img src={Image} alt="" className="profile" />
           <div className="dropdown-content">
             <a href="/">Login</a>
-            <a href="/">Dashboard</a>
+            <a href="/">Profile</a>
           </div>
         </div>
         <button className="hamburger" onClick={showSideBarHandler}>
@@ -51,4 +51,4 @@ const Header = ({ textColor, list, color, position, image }) => {
   );
 };
 
-export default Header;
+export default Posts;

@@ -18,7 +18,7 @@ header {
 
 header ul{
     display: flex;
-    width: 80%;
+    width: 50%;
     justify-content: space-around;
     align-items: center;
     list-style-type: none;
@@ -31,7 +31,7 @@ header a{
 }
 
 header h1{
-    width: 50%;
+    width: 20%;
     text-align: left;
 }
 

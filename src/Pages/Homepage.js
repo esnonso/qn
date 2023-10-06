@@ -24,14 +24,16 @@ const Homepage = () => {
           flex="column"
         >
           <div className="banners-div">
-            <H1Tags fontWeight="800" color="#C6AA64" padding="0 1rem">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis a
-              interdum orci, vel
-            </H1Tags>
-            <PTags color="#C6AA64" padding="0 1rem">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis a
-              interdum orci
-            </PTags>
+          <H1Tags fontWeight="800" color="#C6AA64" padding="0 1rem" margin="0 1rem 0 1rem">
+  Connecting Communities, Clients, and People.
+</H1Tags>
+<PTags color="white" padding="0 1rem" margin="0 1rem 0 1rem" fontSize= "14"> 
+  Abuja Washinton D.c London Annfield United Kingdom
+</PTags>
+
+
+
+
           </div>
         </Container>
       </ContainerBanner>
