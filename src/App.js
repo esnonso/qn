@@ -1,11 +1,44 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Homepage from "./Pages/Homepage";
 import AboutPage from "./Pages/AboutPage";
+import LoginPage from "./Pages/LoginPage";
+import AdminPage from "./Pages/Dashboard";
+import CreatePosts from "./Components/admin/Posts";
+import ManageVideos from "./Components/admin/Videos";
+import ViewUsers from "./Components/admin/users";
+import {
+  storiesApiCalls,
+  userApiCalls,
+  loginUser,
+  fetchPosts,
+  videosApiCalls,
+  fetchVideos,
+} from "./Components/apiHandlers";
 
 const router = createBrowserRouter([
   { path: "/", element: <Homepage /> },
-  { path: "/about", element: <AboutPage /> },
+  { path: "/aboutus", element: <AboutPage /> },
   { path: "/home", element: <Homepage /> },
+  { path: "/login", element: <LoginPage />, action: loginUser },
+  {
+    path: "/dashboard",
+    element: <AdminPage />,
+    children: [
+      {
+        path: "/dashboard",
+        element: <CreatePosts />,
+        action: storiesApiCalls,
+        loader: fetchPosts,
+      },
+      {
+        path: "videos",
+        element: <ManageVideos />,
+        action: videosApiCalls,
+        loader: fetchVideos,
+      },
+      { path: "users", element: <ViewUsers />, action: userApiCalls },
+    ],
+  },
 ]);
 
 function App() {

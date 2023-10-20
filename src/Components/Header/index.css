@@ -4,11 +4,9 @@ header {
     justify-content: space-between;
     padding: 0 2rem;  
     box-sizing: border-box;
-    top: 0;
-    left: 0;
-    z-index: 5;
-    height: fit-content;
+    height: 5rem;
     align-items: center;
+    z-index: 2;
 }
 
 .logo {
@@ -38,13 +36,17 @@ header h1{
 .hamburger {
     border: none;
     background-color: inherit;
+    width:2rem;
+    height:2rem;
+    display:flex;
+    justify-content: space-around;
+    flex-flow: column nowrap;
 }
 
 .hamburger span {
-    display: block;
-    width: 25px;
-    height: 3px;
-    margin: 5px auto;
+    width: 2rem;
+    height: 0.5rem;
+    border-radius: 10px;
     background-color: #D1BB71
 }
 
@@ -108,18 +110,10 @@ header h1{
 }
 
 
-@media only screen and (max-width: 900px) {
-    /* For Phones: */
-    header ul {
-        display: none;
-    }
-}
 
 @media only screen and (min-width: 900px) {
     /* For Larger screens: */
-    .hamburger{
-        display: none;
-    }
+   
     .logo {
         height: 5rem;
         width: 10rem;

@@ -1,0 +1,109 @@
+.nav-admin{
+    font-size: larger;
+    width: 100%;
+    margin:0;
+    padding: 0;
+}
+
+.nav-admin li{
+    padding: 0.7rem 0.3rem;
+    list-style-type: none;
+    border-bottom: 1px gray solid;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.nav-admin a {
+    color: #D1BB71;
+    text-decoration: none;
+}
+
+.post-form-container{
+    margin: 0;
+    padding: 2rem 1rem 0 0;
+    background-color: white;
+    height: 100%;
+    position: fixed;
+    left: 5%;
+    width: 90%;
+    top: 3rem;
+    z-index: 2;
+    animation-name: examples;
+    animation-duration: 1s;
+    text-align: left;
+    font-size: larger;
+    box-sizing: border-box;
+    border-radius: 10px;
+}
+
+.form-control-post {
+    width: 80%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-control-post input
+{
+    height: 1.5rem;
+    margin-bottom: 0.8rem;
+    font-size: large;
+}
+
+.form-control-post select{
+    height: 1.8rem;
+}
+
+textarea{
+    height: 5rem;
+    margin-bottom: 0.5rem;
+    font-size: larger;
+}
+
+.view-stories-container{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+    height:3rem;
+    padding-left: 0.2rem;
+    margin:0 0 0.4rem 0;
+    box-sizing: border-box;
+    font-size: large;
+}
+
+.view-stories-container a{
+    margin: 0.5rem;
+    box-sizing: border-box;
+    text-decoration: none;
+}
+
+.edit-btn{
+   color: blue;   
+}
+
+.delete-btn{
+    color: red;
+}
+
+@media screen and (min-width:800px) {
+    .post-form-container{
+        width: 80%;
+        left:10%;
+    }
+
+    .form-control-post{
+        width: 80%;
+    }
+}
+
+@keyframes examples {
+    from {
+        transform: translateY(100%);
+    }
+
+    to {
+        transform: translate(0%);
+    }
+}

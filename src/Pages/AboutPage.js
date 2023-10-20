@@ -7,13 +7,15 @@ import Footer from "../Components/Footer";
 const AboutPage = () => {
   return (
     <>
-      <Header list={["Home", "About"]} textColor="black" />
+      <Header textColor="black" />
 
       <Container justify="center" flex="column" width="100%">
         <div className="pic">
           <img src={Image} alt="" />
           <div className="about-text">
-            <H1Tags  color= "#D1BB71" margin="5rem 0 0 0">About Us</H1Tags>
+            <H1Tags color="#D1BB71" margin="5rem 0 0 0">
+              About Us
+            </H1Tags>
             <PTags>
               Our Mission is to provide quality legal education to individuals
               and businesses in the areas of Business Law and Immigration Law.
@@ -46,8 +48,10 @@ const AboutPage = () => {
               University, Manchester, United Kingdom.
             </PTags>
 
-            <H1Tags margin="7rem 0 0 0" color="#D1BB71">Contact</H1Tags>
-            <PTags margin="0 0 7rem 0" >Email: queen.nwosu@qnlegal.org.</PTags>
+            <H1Tags margin="7rem 0 0 0" color="#D1BB71">
+              Contact
+            </H1Tags>
+            <PTags margin="0 0 7rem 0">Email: queen.nwosu@qnlegal.org.</PTags>
           </div>
         </div>
       </Container>

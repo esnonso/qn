@@ -13,6 +13,7 @@ const Container = (props) => {
     color: props.textColor,
     width: props.width,
     boxSixing: "border-box",
+    height: props.height,
   };
 
   return (

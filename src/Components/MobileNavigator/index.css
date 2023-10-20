@@ -1,14 +1,37 @@
+.backdrop {
+  background-color: black;
+  height: 100%;
+  position: fixed;
+  left:0;
+  top: 0;
+  width: 100%;
+  opacity: 0.7;
+  z-index: 1;
+}
+
 .sidebar {
   margin: 0;
-  padding: 0.5rem 0.8rem;
-  left:40%;
-  width: 60%;
+  padding: 2rem 1rem 0 0;
   background-color: white;
   height: 100%;
   position: fixed;
-  overflow: auto;
-  top: 5rem;
-  z-index: 4;
+  left: 40%;
+  width: 60%;
+  top: 0;
+  z-index: 2;
+  animation-name: example;
+  animation-duration: 1s;
+  text-align: right;
+  font-size:larger;
+  box-sizing: border-box;
+}
+.sidebar li{
+  list-style-type: none;
+  margin: 0.5rem 0;
+}
+
+.sidebar a:hover {
+  color: #D1BB71;
 }
 
 /* Sidebar links */
@@ -25,21 +48,29 @@
   border-bottom: 1px black solid;
 }
 
-.backdrop{
-  background-color: black;
-  z-index: 3;
-  height: 100%;
-  position: fixed;
-  width: 100%;
-  top: 5rem;
-  opacity: 0.9;
-  color: white;
+.close-nav-btn{
+  background-color: inherit;
+  border: none;
+  font-size: 30px;
+  margin-right: 1rem;
 }
 
-/* MEDIA-QUERIES */
-@media only screen and (min-width: 800px) {
-  /* For desktop: */
-  .sidebar {
-    display: none;
+@keyframes example {
+  from {
+      transform: translateX(100%);
+    }
+  
+    to {
+      transform: translateX(0%);
+    }
+}
+
+@media screen and (min-width:900px) {
+  .sidebar{
+    left:70%;
+    width: 30%;
+    font-size: x-large;
   }
 }
+
+

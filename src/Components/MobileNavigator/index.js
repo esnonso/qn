@@ -1,8 +1,9 @@
 import { createPortal } from "react-dom";
-//import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { NavItems } from "../../Objects";
 import "./index.css";
 
-const BackDrop = (props) => {
+const BackDrop = () => {
   return <div className="backdrop"></div>;
 };
 
@@ -13,16 +14,23 @@ export const BackDropPortal = () => {
 const Sidebar = (props) => {
   return (
     <div className="sidebar">
-      {props.list.map((l, i) => (
-        <li key={`b${i}`}>{l}</li>
+      <button className="close-nav-btn" onClick={props.onClose}>
+        X
+      </button>
+      {NavItems.map((l, i) => (
+        <li key={`b${i}`}>
+          <Link to={`/${l.replace(/\s/g, "").toLowerCase()}`}>
+            {l.trim().toUpperCase()}
+          </Link>
+        </li>
       ))}
     </div>
   );
 };
 
-const SideBarPortal = ({ list }) => {
+const SideBarPortal = (props) => {
   return createPortal(
-    <Sidebar list={list} />,
+    <Sidebar onClose={props.onClose} />,
     document.getElementById("overlays")
   );
 };
@@ -33,7 +41,7 @@ const MobileNavigation = (props) => {
       {props.sidebar && (
         <>
           <BackDropPortal />
-          <SideBarPortal list={props.list} />
+          <SideBarPortal list={props.list} onClose={props.onClose} />
         </>
       )}
     </>

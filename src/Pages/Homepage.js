@@ -14,8 +14,7 @@ const Homepage = () => {
   return (
     <>
       <ContainerBanner color="rgb(25, 25, 25)">
-        <Header list={["Home", "About"]} textColor="#C6AA64" />
-
+        <Header textColor="#C6AA64" />
         <Container
           height="70vh"
           textColor="white"
@@ -24,16 +23,22 @@ const Homepage = () => {
           flex="column"
         >
           <div className="banners-div">
-          <H1Tags fontWeight="800" color="#C6AA64" padding="0 1rem" margin="0 1rem 0 1rem">
-  Connecting Communities, Clients, and People.
-</H1Tags>
-<PTags color="white" padding="0 1rem" margin="0 1rem 0 1rem" fontSize= "14"> 
-  Abuja Washinton D.c London Annfield United Kingdom
-</PTags>
-
-
-
-
+            <H1Tags
+              fontWeight="800"
+              color="#C6AA64"
+              padding="0 1rem"
+              margin="0 1rem 0 1rem"
+            >
+              Connecting Communities, Clients, and People.
+            </H1Tags>
+            <PTags
+              color="white"
+              padding="0 1rem"
+              margin="0 1rem 0 1rem"
+              fontSize="14"
+            >
+              Abuja Washinton D.c London Annfield United Kingdom
+            </PTags>
           </div>
         </Container>
       </ContainerBanner>

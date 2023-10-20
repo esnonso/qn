@@ -1,12 +1,11 @@
 import { useState } from "react";
 import { useLoaderData } from "react-router-dom";
 import Container from "../../Containers/container";
-import AddPosts from "./addPosts";
-import EditPosts from "./EditPost";
+import AddVideo from "./addVideos";
 import Button from "../../Button";
 import "../index.css";
 
-const CreatePosts = () => {
+const ManageVideos = () => {
   const [modal, showModal] = useState(false);
   const [editForm, showEdit] = useState(false);
   const [itemToBeEdited, setItemToBeEdited] = useState("");
@@ -24,7 +23,7 @@ const CreatePosts = () => {
   return (
     <Container flex="column" padding="1rem 0 0 0.2rem" width="100%">
       <Button
-        text="Add Posts"
+        text="Add Videos"
         color="#D1BB71"
         back={"black"}
         width="10rem"
@@ -34,10 +33,10 @@ const CreatePosts = () => {
         margin="0 0 1rem 0"
         click={showModalHandler}
       />
-      {modal && <AddPosts onHide={hideModalHandler} />}
-      {editForm && (
+      {modal && <AddVideo onHide={hideModalHandler} />}
+      {/* {editForm && (
         <EditPosts data={itemToBeEdited} onHide={hideEditModalHandler} />
-      )}
+      )} */}
       {data.map((d) => (
         <div key={d._id} className="view-stories-container">
           <p style={{ width: "80%" }}>{d.title}</p>
@@ -65,4 +64,4 @@ const CreatePosts = () => {
   );
 };
 
-export default CreatePosts;
+export default ManageVideos;
