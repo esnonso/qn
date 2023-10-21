@@ -10,6 +10,7 @@ import AdminPage from "./Pages/Dashboard";
 import CreatePosts from "./Components/admin/Posts";
 import ManageVideos from "./Components/admin/Videos";
 import ViewUsers from "./Components/admin/users";
+import ErrorHandler from "./Components/Error";
 import {
   storiesApiCalls,
   userApiCalls,
@@ -20,9 +21,19 @@ import {
 } from "./Components/apiHandlers";
 
 const router = createBrowserRouter([
-  { path: "/", element: <Homepage />, loader: fetchPosts },
+  {
+    path: "/",
+    element: <Homepage />,
+    loader: fetchPosts,
+    errorElement: <ErrorHandler />,
+  },
   { path: "/aboutus", element: <AboutPage /> },
-  { path: "/home", element: <Homepage />, loader: fetchPosts },
+  {
+    path: "/home",
+    element: <Homepage />,
+    loader: fetchPosts,
+    errorElement: <ErrorHandler />,
+  },
   { path: "/login", element: <LoginPage />, action: loginUser },
   {
     path: "/dashboard",
@@ -42,6 +53,7 @@ const router = createBrowserRouter([
       },
       { path: "users", element: <ViewUsers />, action: userApiCalls },
     ],
+    errorElement: <ErrorHandler />,
   },
 ]);
 

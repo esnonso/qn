@@ -19,8 +19,7 @@ export const storiesApiCalls = async ({ request }) => {
         alert("success");
         return "Post created sucessfully";
       } catch (err) {
-        console.log(err);
-        return err;
+        throw err;
       }
     }
     case "PUT": {
@@ -46,8 +45,7 @@ export const storiesApiCalls = async ({ request }) => {
         alert("success");
         return "Post edit sucessfully";
       } catch (err) {
-        console.log(err);
-        return err;
+        throw err;
       }
     }
     default:
@@ -74,8 +72,7 @@ export const userApiCalls = async ({ request }) => {
         alert("success");
         return "User created sucessfully, check your email for verification";
       } catch (err) {
-        console.log(err);
-        return err;
+        throw err;
       }
     }
     default:
@@ -101,8 +98,7 @@ export const loginUser = async ({ request }) => {
     alert("success");
     return data;
   } catch (err) {
-    console.log(err);
-    return err;
+    throw err;
   }
 };
 
@@ -111,10 +107,10 @@ export const fetchPosts = async () => {
     const response = await fetch("http://localhost:5002/api/stories");
     if (!response.ok) throw new Error("An error occured getting posts");
     const data = await response.json();
+    if (!response.ok) throw new Error("An error occured fetching posts");
     return data.data;
   } catch (error) {
-    console.log(error);
-    return error;
+    throw error;
   }
 };
 
@@ -126,8 +122,7 @@ export const fetchVideos = async () => {
     console.log(data.data);
     return data.data;
   } catch (error) {
-    console.log(error);
-    return error;
+    throw error;
   }
 };
 
@@ -151,8 +146,7 @@ export const videosApiCalls = async ({ request }) => {
         alert("success");
         return "Post created sucessfully";
       } catch (err) {
-        console.log(err);
-        return err;
+        throw err;
       }
     }
     case "PUT": {
@@ -177,8 +171,7 @@ export const videosApiCalls = async ({ request }) => {
         alert("success");
         return "Post edit sucessfully";
       } catch (err) {
-        console.log(err);
-        return err;
+        throw err;
       }
     }
     default:

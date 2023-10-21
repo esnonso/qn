@@ -7,7 +7,7 @@ const PrintRecentPosts = ({ posts }) => {
     <div className="recent-cont-posts">
       <H1Tags textAlign="center">Recent posts</H1Tags>
       <Container width="100%" flex="column">
-        {posts &&
+        {posts.length > 0 &&
           posts.map((i) => (
             <ContainerFlexColumn
               width="100%"

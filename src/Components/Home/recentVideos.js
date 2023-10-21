@@ -6,7 +6,7 @@ const PrintRecentVideos = ({ videos }) => {
     <div className="recent-cont-vids">
       <H1Tags textAlign="center">Recent videos</H1Tags>
       <Container width="100%" flex="column">
-        {videos &&
+        {videos.length > 0 &&
           videos.slice(0, 6).map((i) => (
             <Container
               flex="column"
