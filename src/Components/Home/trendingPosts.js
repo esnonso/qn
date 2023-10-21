@@ -1,11 +1,10 @@
-import { useEffect, useState } from "react";
-import Button from "../Button";
 import Container from "../Containers/container";
 import Cards from "../Cards";
 import { H1Tags, PTags, ImageTags } from "../Text";
+import Button from "../Button";
 
-const PrintTrendingVideos = ({
-  videos,
+const PrintTrendingPosts = ({
+  posts,
   count,
   increaseCountHandler,
   decreaseCountHandler,
@@ -13,7 +12,7 @@ const PrintTrendingVideos = ({
   return (
     <>
       <H1Tags textAlign="center" fontSize="30px" margin="4rem">
-        Trending Videos
+        Trending Posts
       </H1Tags>
       <Container marginTop="4rem">
         <Container align="center">
@@ -22,23 +21,19 @@ const PrintTrendingVideos = ({
             font="40px"
             height={"fit-content"}
             click={decreaseCountHandler}
-            back={"white"}
+            back={""}
           />
         </Container>
-        <Container
-          alignItems="center"
-          wrap="wrap"
-          width="90%"
-          margin="0 auto 0 auto"
-        >
-          {videos.length > 0 &&
-            videos[count].map((item, ind) => (
-              <Cards key={item._id} height="fit-content">
-                <video controls autoPlay={false}>
-                  <source src="mov_bbb.mp4" type="video/mp4" />
-                  <source src="mov_bbb.ogg" type="video/ogg" />
-                  Your browser does not support HTML video.
-                </video>
+        <Container alignItems="center" width="90%" margin="0 auto 0 auto">
+          {posts.length > 0 &&
+            posts[count].map((item) => (
+              <Cards key={item._id} height="25rem">
+                <ImageTags
+                  source={require("../../Images/def.jpg")}
+                  height="65%"
+                  width="100%"
+                  alt=""
+                />
                 <PTags fontSize="18px" margin="0.7rem 0.4rem">
                   {item.title}
                 </PTags>
@@ -67,6 +62,7 @@ const PrintTrendingVideos = ({
               </Cards>
             ))}
         </Container>
+
         <Container align="center">
           <Button
             text="&#62;"
@@ -81,4 +77,4 @@ const PrintTrendingVideos = ({
   );
 };
 
-export default PrintTrendingVideos;
+export default PrintTrendingPosts;

@@ -42,7 +42,7 @@ const EditPostForm = (props) => {
       </H1Tags>
       <div className="form-control-post">
         <label>ID</label>
-        <input type="text" name="id" value={props.data._id} />
+        <input type="text" name="id" value={props.data._id} readOnly />
       </div>
       <div className="form-control-post">
         <label>Topic</label>

@@ -1,16 +1,77 @@
+import { useLoaderData } from "react-router-dom";
+import { useEffect, useState } from "react";
 import ContainerBanner from "../Components/Containers/container-banner";
 import Container from "../Components/Containers/container";
 import Header from "../Components/Header";
 import { H1Tags, PTags } from "../Components/Text";
 import ContainerFlexColumn from "../Components/Containers/container-flex-column";
-import PrintTrending from "../Components/Home/trending";
+import PrintTrendingPosts from "../Components/Home/trendingPosts";
 import PrintTrendingVideos from "../Components/Home/trendingVideos";
 import PrintRecentPosts from "../Components/Home/recentPosts";
 import PrintRecentVideos from "../Components/Home/recentVideos";
-import { DEFAULT } from "../App";
 import Footer from "../Components/Footer";
+import { useScreenSize } from "../Components/Hooks/useScreenSize";
 
 const Homepage = () => {
+  const data = useLoaderData();
+  const [posts, setPosts] = useState([]);
+  const [videos, setVideos] = useState([]);
+  const [count, setCount] = useState(0);
+  const [screenSize, setScreenSize] = useScreenSize();
+
+  useEffect(() => {
+    const phone = window.matchMedia("(max-width: 700px)");
+    const tab = window.matchMedia(
+      "(min-width: 701px) and ((max-width: 1016px)"
+    );
+    const desktop = window.matchMedia("(min-width: 1016px)");
+    if (phone.matches) {
+      const joinedArr = [];
+      for (var i = 0; i < 3; i++) {
+        joinedArr.push([data[i]]);
+      }
+      setPosts(joinedArr);
+      setVideos(joinedArr);
+    }
+    if (tab.matches) {
+      const joinedArr = [];
+      for (i = 0; i < 6; i++) {
+        const lastItem = joinedArr[joinedArr.length - 1];
+        if (!lastItem || lastItem.length === 2) {
+          joinedArr.push([data[i]]);
+        } else {
+          lastItem.push(data[i]);
+        }
+      }
+      setPosts(joinedArr);
+      setVideos(joinedArr);
+    }
+    if (desktop.matches) {
+      const joinedArr = [];
+      for (i = 0; i < 9; i++) {
+        const lastItem = joinedArr[joinedArr.length - 1];
+        if (!lastItem || lastItem.length === 3) {
+          joinedArr.push([data[i]]);
+        } else {
+          lastItem.push(data[i]);
+        }
+      }
+      setPosts(joinedArr);
+      setVideos(joinedArr);
+    }
+  }, [screenSize]);
+  const increaseCountHandler = () => {
+    if (count < 2) {
+      setCount((prevState) => prevState + 1);
+    }
+  };
+
+  const decreaseCountHandler = () => {
+    if (count > 0) {
+      setCount((prevState) => prevState - 1);
+    }
+  };
+
   return (
     <>
       <ContainerBanner color="rgb(25, 25, 25)">
@@ -43,14 +104,25 @@ const Homepage = () => {
         </Container>
       </ContainerBanner>
 
-      <PrintTrending arr={DEFAULT} title="Posts" />
+      <PrintTrendingPosts
+        title="Posts"
+        posts={posts}
+        count={count}
+        increaseCountHandler={increaseCountHandler}
+        decreaseCountHandler={decreaseCountHandler}
+      />
 
-      <PrintTrendingVideos arr={DEFAULT} />
+      <PrintTrendingVideos
+        videos={videos}
+        count={count}
+        increaseCountHandler={increaseCountHandler}
+        decreaseCountHandler={decreaseCountHandler}
+      />
 
       <ContainerFlexColumn margin="5rem 0rem" width="100%" padding="0 1rem">
-        <PrintRecentPosts arr={DEFAULT} />
+        <PrintRecentPosts posts={data} />
 
-        <PrintRecentVideos arr={DEFAULT} />
+        <PrintRecentVideos videos={data} />
       </ContainerFlexColumn>
       <Footer />
     </>

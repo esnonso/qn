@@ -30,6 +30,7 @@ export const storiesApiCalls = async ({ request }) => {
       const body = formData.get("body");
       const topic = formData.get("topic");
       const id = formData.get("id");
+      console.log(title);
       try {
         const response = await fetch(
           "http://localhost:5002/api/stories/" + id,

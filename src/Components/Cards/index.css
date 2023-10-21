@@ -1,6 +1,6 @@
 .cards{
     width: 90%;
-    margin: 0rem auto 0rem auto;
+    margin: 1rem auto 0rem auto;
     display: flex;
     flex-direction: column;
     box-sizing: border-box;
@@ -16,7 +16,7 @@
 
 @media only screen and (min-width : 915px) and (max-width: 1200px){
     .cards{
-        width: 33%;
+        width: 30%;
         margin-top: 1rem;
     }
 }
