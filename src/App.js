@@ -17,16 +17,16 @@ import {
   storiesApiCalls,
   userApiCalls,
   loginUser,
-  fetchPosts,
   videosApiCalls,
   fetchVideos,
+  fetchPostsAndVideos,
 } from "./Components/apiHandlers";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Homepage />,
-    loader: fetchPosts,
+    loader: fetchPostsAndVideos,
     errorElement: <ErrorHandler />,
   },
   { path: "/aboutus", element: <AboutPage /> },
@@ -35,7 +35,7 @@ const router = createBrowserRouter([
   {
     path: "/home",
     element: <Homepage />,
-    loader: fetchPosts,
+    loader: fetchPostsAndVideos,
     errorElement: <ErrorHandler />,
   },
   { path: "/login", element: <LoginPage />, action: loginUser },
@@ -47,7 +47,6 @@ const router = createBrowserRouter([
         path: "/dashboard",
         element: <CreatePosts />,
         action: storiesApiCalls,
-        loader: fetchPosts,
       },
       {
         path: "videos",

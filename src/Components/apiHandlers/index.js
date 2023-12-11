@@ -22,32 +22,32 @@ export const storiesApiCalls = async ({ request }) => {
         throw err;
       }
     }
-    case "PUT": {
-      let formData = await request.formData();
-      const title = formData.get("title");
-      const imageUrl = formData.get("imgUrl");
-      const body = formData.get("body");
-      const topic = formData.get("topic");
-      const id = formData.get("id");
-      console.log(title);
-      try {
-        const response = await fetch(
-          "http://localhost:5002/api/stories/" + id,
-          {
-            method: "PUT",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ title, imageUrl, body, topic }),
-          }
-        );
-        if (!response.ok) throw new Error("An error occured try again");
-        alert("success");
-        return "Post edit sucessfully";
-      } catch (err) {
-        throw err;
+    case "PUT":
+      {
+        let formData = await request.formData();
+        const title = formData.get("title");
+        const body = formData.get("body");
+        const topic = formData.get("topic");
+        const id = formData.get("id");
+        try {
+          const response = await fetch(
+            "http://localhost:5002/api/stories/" + id,
+            {
+              method: "PUT",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({ title, body, topic }),
+            }
+          );
+          if (!response.ok) throw new Error("An error occured try again");
+          alert("success");
+          return "Post edit sucessfully";
+        } catch (err) {
+          console.log(err);
+        }
       }
-    }
+      break;
     default:
       return;
   }
@@ -119,7 +119,6 @@ export const fetchVideos = async () => {
     const response = await fetch("http://localhost:5002/api/videos");
     if (!response.ok) throw new Error("An error occured getting videos");
     const data = await response.json();
-    console.log(data.data);
     return data.data;
   } catch (error) {
     throw error;
@@ -176,5 +175,15 @@ export const videosApiCalls = async ({ request }) => {
     }
     default:
       return;
+  }
+};
+
+export const fetchPostsAndVideos = async () => {
+  try {
+    const posts = await fetchPosts();
+    const videos = await fetchVideos();
+    return { posts, videos };
+  } catch {
+    return "An error occured fetching data";
   }
 };

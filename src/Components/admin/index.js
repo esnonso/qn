@@ -7,8 +7,8 @@ const AdminPortal = () => {
   return (
     <>
       <Header color="black" />
-      <Container width="100%">
-        <Container width="25%" color="black" height="90vh" textColor="white">
+      <Container width="100%" height="110vh">
+        <Container width="25%" color="black" height="100%" textColor="white">
           <ul className="nav-admin">
             <Link to="/dashboard">
               <li>Manage Posts</li>

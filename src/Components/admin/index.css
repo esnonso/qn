@@ -87,6 +87,21 @@ textarea{
     color: red;
 }
 
+.submit-btn{
+    color: #D1BB71;
+    background-color: black;
+    height: 3rem;
+    width:10rem ;
+    border-radius: 5px;
+    font-size: large;
+    border: none;
+}
+
+.submit-btn:disabled{
+    background-color: gray;
+    color:black;
+}
+
 @media screen and (min-width:800px) {
     .post-form-container{
         width: 80%;

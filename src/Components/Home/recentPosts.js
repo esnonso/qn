@@ -16,11 +16,7 @@ const PrintRecentPosts = ({ posts }) => {
               key={i._id}
               margin="0 0 1rem 0"
             >
-              <img
-                className="recent-img"
-                src={require("../../Images/def.jpg")}
-                alt=""
-              />
+              <img className="recent-img" src={i.imageUrl} alt="" />
 
               <Container flex="column" margin="0 0 0 0.5rem" width="100%">
                 <PTags>

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Form } from "react-router-dom";
 import "../index.css";
 import { H1Tags } from "../../Text";
@@ -6,17 +6,9 @@ import Button from "../../Button";
 import Container from "../../Containers/container";
 
 const EditPostForm = (props) => {
-  const [topic, setTopic] = useState("");
-  const [title, setTitle] = useState("");
-  const [imgUrl, setImgUrl] = useState("");
-  const [body, setBody] = useState("");
-
-  useEffect(() => {
-    setTopic(props.data.topic);
-    setTitle(props.data.title);
-    setImgUrl(props.data.imageUrl);
-    setBody(props.data.slug);
-  }, []);
+  const [topic, setTopic] = useState(props.data.topic);
+  const [title, setTitle] = useState(props.data.title);
+  const [body, setBody] = useState(props.data.slug);
 
   const handleChange = (setState) => (e) => {
     setState(e.target.value);
@@ -63,7 +55,7 @@ const EditPostForm = (props) => {
         />
       </div>
 
-      <div className="form-control-post">
+      {/* <div className="form-control-post">
         <label>Image url</label>
         <input
           type="text"
@@ -71,7 +63,7 @@ const EditPostForm = (props) => {
           value={imgUrl}
           onChange={handleChange(setImgUrl)}
         />
-      </div>
+      </div> */}
 
       <div className="form-control-post">
         <label>Description</label>
