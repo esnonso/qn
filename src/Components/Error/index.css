@@ -1,0 +1,21 @@
+.error-modal{
+    margin: 0;
+    padding: 0.5rem;
+    background-color: white;
+    height: 15%;
+    position: fixed;
+    left: 25%;
+    width: 50%;
+    top: 2%;
+    z-index: 4;
+    font-size: larger;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.close-btn{
+    color: white;
+    background-color:red ;
+    border: 1px #721C24 solid;
+    border-radius: 5px;
+}

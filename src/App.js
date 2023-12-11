@@ -16,7 +16,6 @@ import {
   storiesApiCalls,
   userApiCalls,
   loginUser,
-  fetchPosts,
   videosApiCalls,
   fetchVideos,
   fetchPostsAndVideos,
@@ -46,7 +45,6 @@ const router = createBrowserRouter([
         path: "/dashboard",
         element: <CreatePosts />,
         action: storiesApiCalls,
-        loader: fetchPosts,
       },
       {
         path: "videos",
