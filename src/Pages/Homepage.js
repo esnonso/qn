@@ -14,8 +14,61 @@ import Footer from "../Components/Footer";
 
 const Homepage = () => {
   const data = useLoaderData();
-  const [posts, setPosts] = useState(data.posts);
-  const [videos, setVideos] = useState(data.videos);
+  const [posts, setPosts] = useState([]);
+  const [videos, setVideos] = useState([]);
+
+  useEffect(() => {
+    const phone = window.matchMedia("(max-width: 700px)");
+    const tab = window.matchMedia(
+      "(min-width: 701px) and ((max-width: 1016px)"
+    );
+    const desktop = window.matchMedia("(min-width: 1016px)");
+    if (phone.matches) {
+      const joinedArr = [];
+      for (var i = 0; i < 3; i++) {
+        joinedArr.push([data[i]]);
+      }
+      setPosts(joinedArr);
+      setVideos(joinedArr);
+    }
+    if (tab.matches) {
+      const joinedArr = [];
+      for (i = 0; i < 6; i++) {
+        const lastItem = joinedArr[joinedArr.length - 1];
+        if (!lastItem || lastItem.length === 2) {
+          joinedArr.push([data[i]]);
+        } else {
+          lastItem.push(data[i]);
+        }
+      }
+      setPosts(joinedArr);
+      setVideos(joinedArr);
+    }
+    if (desktop.matches) {
+      const joinedArr = [];
+      for (i = 0; i < 9; i++) {
+        const lastItem = joinedArr[joinedArr.length - 1];
+        if (!lastItem || lastItem.length === 3) {
+          joinedArr.push([data[i]]);
+        } else {
+          lastItem.push(data[i]);
+        }
+      }
+      setPosts(joinedArr);
+      setVideos(joinedArr);
+    }
+  }, [screenSize]);
+  const increaseCountHandler = () => {
+    if (count < 2) {
+      setCount((prevState) => prevState + 1);
+    }
+  };
+
+  const decreaseCountHandler = () => {
+    if (count > 0) {
+      setCount((prevState) => prevState - 1);
+    }
+  };
 
   return (
     <>

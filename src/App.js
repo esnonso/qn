@@ -1,13 +1,14 @@
 import {
   createBrowserRouter,
   RouterProvider,
-  redirect,
+  //redirect,
 } from "react-router-dom";
 import Homepage from "./Pages/Homepage";
 import AboutPage from "./Pages/AboutPage";
 import LoginPage from "./Pages/LoginPage";
 import AdminPage from "./Pages/Dashboard";
 import CreatePosts from "./Components/admin/Posts";
+import SinglePost from "./Pages/SinglePost";
 import ManageVideos from "./Components/admin/Videos";
 import ViewUsers from "./Components/admin/users";
 import ErrorHandler from "./Components/Error";
@@ -29,6 +30,7 @@ const router = createBrowserRouter([
     errorElement: <ErrorHandler />,
   },
   { path: "/aboutus", element: <AboutPage /> },
+  { path: "/singlepost", element: <SinglePost /> },
   {
     path: "/home",
     element: <Homepage />,

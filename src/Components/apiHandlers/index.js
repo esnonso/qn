@@ -3,7 +3,7 @@ export const storiesApiCalls = async ({ request }) => {
     case "POST": {
       let formData = await request.formData();
       const title = formData.get("title");
-      const imageUrl = formData.get("imgUrl");
+      const imageUrl = formData.get("imageUrl");
       const body = formData.get("body");
       const topic = formData.get("topic");
 
