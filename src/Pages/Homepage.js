@@ -25,7 +25,7 @@ const Homepage = () => {
       "(min-width: 701px) and ((max-width: 1016px)"
     );
     const desktop = window.matchMedia("(min-width: 1016px)");
-    if (phone.matches) {
+    if (phone.matches && data.length >= 3) {
       const joinedArr = [];
       for (var i = 0; i < 3; i++) {
         joinedArr.push([data[i]]);
@@ -33,7 +33,7 @@ const Homepage = () => {
       setPosts(joinedArr);
       setVideos(joinedArr);
     }
-    if (tab.matches) {
+    if (tab.matches && data.length >= 6) {
       const joinedArr = [];
       for (i = 0; i < 6; i++) {
         const lastItem = joinedArr[joinedArr.length - 1];
@@ -46,7 +46,7 @@ const Homepage = () => {
       setPosts(joinedArr);
       setVideos(joinedArr);
     }
-    if (desktop.matches) {
+    if (desktop.matches && data.length >= 9) {
       const joinedArr = [];
       for (i = 0; i < 9; i++) {
         const lastItem = joinedArr[joinedArr.length - 1];
