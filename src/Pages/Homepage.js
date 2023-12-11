@@ -77,7 +77,7 @@ const Homepage = () => {
       <ContainerBanner color="rgb(25, 25, 25)">
         <Header textColor="#C6AA64" />
         <Container
-          height="70vh"
+          height="70vh" 
           textColor="white"
           justify="center"
           marginTop="5rem"

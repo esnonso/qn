@@ -69,82 +69,7 @@ background:#bcf5bc
     background:#008489;
     height:66px;
 } */
-header *{
-    color:white;
-}
-header .logo{
-    float:left;
-    height:inherit;
-    margin-left: 2em;
-}
-header .logo-text {
-    margin:9px;
-    
-}
-header .logo-text span{
-    color:#05f7ff;
-    font-family:'candal' , serif;
-}
 
-header ul{
-    float:right;
-    margin:0px;
-    list-style:none;
-}
-
-header ul li{
-    float:left;
-    position:relative;
-}
-header ul li ul{
-    position: absolute;
-    top:66px;
-    right:0px;
-    width:180px;
-    display:none;
-    z-index:947778;
-}
-
-header ul li:hover ul{
-    display:block;
-}
-header ul li ul li{
-    width:100%;
-}
-
-header ul li ul li a{
-    padding:10px;
-    background:white;
-    color:#444;
-
-}
-
-header ul li ul li a:hover{
-    background:#d5d6d6;
-
-}
-header ul li ul li a.logout{
-    color:red;
-}
-
-
-
-header ul li a{
-    display:block;
-    padding:21px;
-    font-size:1.1em;
-    text-decoration:none;
-
-}
-
-header ul li a:hover{
-    background:#006669;
-    transition:0.5s;
-}
-
-header .menu-toggle{
-    display:none;
-}
 .page-wrapper{
     min-height:100%;
 }
@@ -385,7 +310,7 @@ margin-top:80px;
   
   .comment-input button {
     padding: 8px 16px;
-    background-color: #007bff;
+    background-color: #cd007bff;
     color: white;
     border: none;
     border-radius: 5px;

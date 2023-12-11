@@ -10,8 +10,11 @@ header {
 }
 
 .logo {
-    height: 2rem;
-    width: 5rem;
+    transform: scale(2);
+    height:10rem;
+    width:10rem;
+    margin-left:2rem;
+
 }
 
 header ul{

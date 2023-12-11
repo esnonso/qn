@@ -9,6 +9,7 @@ import LoginPage from "./Pages/LoginPage";
 import AdminPage from "./Pages/Dashboard";
 import CreatePosts from "./Components/admin/Posts";
 import SinglePost from "./Pages/SinglePost";
+import ContactUsPage from "./Pages/ContactUsPage";
 import ManageVideos from "./Components/admin/Videos";
 import ViewUsers from "./Components/admin/users";
 import ErrorHandler from "./Components/Error";
@@ -30,6 +31,7 @@ const router = createBrowserRouter([
   },
   { path: "/aboutus", element: <AboutPage /> },
   { path: "/singlepost", element: <SinglePost /> },
+  { path: "/contactuspage", element: <ContactUsPage /> },
   {
     path: "/home",
     element: <Homepage />,
