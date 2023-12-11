@@ -18,20 +18,21 @@ import {
   fetchPosts,
   videosApiCalls,
   fetchVideos,
+  fetchPostsAndVideos,
 } from "./Components/apiHandlers";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Homepage />,
-    loader: fetchPosts,
+    loader: fetchPostsAndVideos,
     errorElement: <ErrorHandler />,
   },
   { path: "/aboutus", element: <AboutPage /> },
   {
     path: "/home",
     element: <Homepage />,
-    loader: fetchPosts,
+    loader: fetchPostsAndVideos,
     errorElement: <ErrorHandler />,
   },
   { path: "/login", element: <LoginPage />, action: loginUser },

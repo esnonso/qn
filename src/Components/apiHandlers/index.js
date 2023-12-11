@@ -119,7 +119,6 @@ export const fetchVideos = async () => {
     const response = await fetch("http://localhost:5002/api/videos");
     if (!response.ok) throw new Error("An error occured getting videos");
     const data = await response.json();
-    console.log(data.data);
     return data.data;
   } catch (error) {
     throw error;
@@ -176,5 +175,15 @@ export const videosApiCalls = async ({ request }) => {
     }
     default:
       return;
+  }
+};
+
+export const fetchPostsAndVideos = async () => {
+  try {
+    const posts = await fetchPosts();
+    const videos = await fetchVideos();
+    return { posts, videos };
+  } catch {
+    return "An error occured fetching data";
   }
 };
