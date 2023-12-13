@@ -1,14 +1,36 @@
+import { useEffect, useState } from "react";
 import Container from "../Containers/container";
 import { H1Tags, PTags } from "../Text";
 import ContainerFlexColumn from "../Containers/container-flex-column";
+import Button from "../Button";
+import { paginate } from "../Functions";
 
 const PrintRecentPosts = ({ posts }) => {
+  const [page, setPage] = useState(0);
+  const [batch, setBatch] = useState([]);
+
+  const putVideosInBatches = async () => {
+    setBatch(paginate(posts));
+  };
+
+  useEffect(() => {
+    putVideosInBatches();
+  }, []);
+
+  const decreasePageHandler = () => {
+    if (page === 0) return;
+    setPage((prevState) => prevState - 1);
+  };
+  const increasePageHandler = () => {
+    if (page === batch.length - 1) return;
+    setPage((prevState) => prevState + 1);
+  };
   return (
     <div className="recent-cont-posts">
       <H1Tags textAlign="center">Recent posts</H1Tags>
       <Container width="100%" flex="column">
-        {posts.length > 0 &&
-          posts.map((i) => (
+        {batch.length > 0 &&
+          batch[page].map((i) => (
             <ContainerFlexColumn
               width="100%"
               height="10rem"
@@ -29,6 +51,39 @@ const PrintRecentPosts = ({ posts }) => {
               </Container>
             </ContainerFlexColumn>
           ))}
+      </Container>
+      <Container width="100%" justify="center">
+        <Button
+          text="Previous"
+          back="black"
+          color="#D1BB71"
+          font="large"
+          borderRadius={"5px"}
+          margin={"0 0.2rem 0 0"}
+          width="6rem"
+          click={decreasePageHandler}
+        />
+        {batch.map((b, i) => (
+          <Button
+            text={i + 1}
+            key={i}
+            back="black"
+            color="#D1BB71"
+            font="large"
+            borderRadius={"5px"}
+            margin={"0 0.2rem 0 0"}
+          />
+        ))}
+        <Button
+          text="Next"
+          back="black"
+          color="#D1BB71"
+          font="large"
+          borderRadius={"5px"}
+          margin={"0 0.2rem 0 0"}
+          width="6rem"
+          click={increasePageHandler}
+        />
       </Container>
     </div>
   );

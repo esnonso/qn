@@ -1,13 +1,36 @@
+import { useEffect, useState } from "react";
 import Container from "../Containers/container";
 import { H1Tags, PTags } from "../Text";
+import Button from "../Button";
+import { paginate } from "../Functions";
 
 const PrintRecentVideos = ({ videos }) => {
+  const [page, setPage] = useState(0);
+  const [batch, setBatch] = useState([]);
+
+  const putVideosInBatches = async () => {
+    setBatch(paginate(videos));
+  };
+
+  useEffect(() => {
+    putVideosInBatches();
+  }, []);
+
+  const decreasePageHandler = () => {
+    if (page === 0) return;
+    setPage((prevState) => prevState - 1);
+  };
+  const increasePageHandler = () => {
+    if (page === batch.length - 1) return;
+    setPage((prevState) => prevState + 1);
+  };
+
   return (
     <div className="recent-cont-vids">
       <H1Tags textAlign="center">Recent videos</H1Tags>
       <Container width="100%" flex="column">
-        {videos.length > 0 &&
-          videos.slice(0, 6).map((i) => (
+        {batch.length > 0 &&
+          batch[page].map((i) => (
             <Container
               flex="column"
               width="100%"
@@ -16,8 +39,8 @@ const PrintRecentVideos = ({ videos }) => {
               margin="0 0 1rem 0"
             >
               <video controls autoPlay={false}>
-                <source src="mov_bbb.mp4" type="video/mp4" />
-                <source src="mov_bbb.ogg" type="video/ogg" />
+                <source src={i.videoUrl} type="video/mp4" />
+                {/* <source src="mov_bbb.ogg" type="video/ogg" /> */}
                 Your browser does not support HTML video.
               </video>
 
@@ -28,6 +51,39 @@ const PrintRecentVideos = ({ videos }) => {
               </Container>
             </Container>
           ))}
+      </Container>
+      <Container width="100%" justify="center">
+        <Button
+          text="Previous"
+          back="black"
+          color="#D1BB71"
+          font="large"
+          borderRadius={"5px"}
+          margin={"0 0.2rem 0 0"}
+          width="6rem"
+          click={decreasePageHandler}
+        />
+        {batch.map((b, i) => (
+          <Button
+            text={i + 1}
+            key={i}
+            back="black"
+            color="#D1BB71"
+            font="large"
+            borderRadius={"5px"}
+            margin={"0 0.2rem 0 0"}
+          />
+        ))}
+        <Button
+          text="Next"
+          back="black"
+          color="#D1BB71"
+          font="large"
+          borderRadius={"5px"}
+          margin={"0 0.2rem 0 0"}
+          width="6rem"
+          click={increasePageHandler}
+        />
       </Container>
     </div>
   );

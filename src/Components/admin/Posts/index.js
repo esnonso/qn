@@ -7,10 +7,11 @@ import Button from "../../Button";
 import Modal from "../../Modal";
 import { PTags } from "../../Text";
 import ErrorModal from "../../Error/errorModal";
+import { paginate } from "../../Functions";
 import "../index.css";
 
 const CreatePosts = () => {
-  const [addNewUser, showAddNewUserForm] = useState(false);
+  const [addNewPost, showAddNewPostForm] = useState(false);
   const [editForm, showEdit] = useState(false);
   const [itemToBeEdited, setItemToBeEdited] = useState("");
   const [batch, setBatch] = useState([]);
@@ -22,24 +23,15 @@ const CreatePosts = () => {
 
   const putPostsInBatches = async () => {
     const data = await fetchPosts();
-    const joinedArr = [];
-    for (var i = 0; i < data.length; i++) {
-      const lastItem = joinedArr[joinedArr.length - 1];
-      if (!lastItem || lastItem.length === 9) {
-        joinedArr.push([data[i]]);
-      } else {
-        lastItem.push(data[i]);
-      }
-    }
-    setBatch(joinedArr);
+    setBatch(paginate(data));
   };
 
   useEffect(() => {
     putPostsInBatches();
   }, []);
 
-  const showAddNewUserHandler = () => showAddNewUserForm(true);
-  const hideAddNewUserHandler = () => showAddNewUserForm(false);
+  const showaddNewPostHandler = () => showAddNewPostForm(true);
+  const hideaddNewPostHandler = () => showAddNewPostForm(false);
   const hideEditModalHandler = () => showEdit(false);
   const showEditModalHandler = (post) => {
     setItemToBeEdited(post);
@@ -96,10 +88,10 @@ const CreatePosts = () => {
           borderRadius="5px"
           font="larger"
           margin="0 0 0.5rem 0"
-          click={showAddNewUserHandler}
+          click={showaddNewPostHandler}
         />
       </Container>
-      {addNewUser && <AddPosts onHide={hideAddNewUserHandler} />}
+      {addNewPost && <AddPosts onHide={hideaddNewPostHandler} />}
       {editForm && (
         <EditPosts data={itemToBeEdited} onHide={hideEditModalHandler} />
       )}
