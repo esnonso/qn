@@ -1,27 +1,5 @@
 export const storiesApiCalls = async ({ request }) => {
   switch (request.method) {
-    case "POST": {
-      let formData = await request.formData();
-      const title = formData.get("title");
-      const imageUrl = formData.get("imageUrl");
-      const body = formData.get("body");
-      const topic = formData.get("topic");
-
-      try {
-        const response = await fetch("http://localhost:5002/api/stories", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ title, imageUrl, body, topic }),
-        });
-        if (!response.ok) throw new Error("An error occured try again");
-        alert("success");
-        return "Post created sucessfully";
-      } catch (err) {
-        throw err;
-      }
-    }
     case "PUT":
       {
         let formData = await request.formData();
