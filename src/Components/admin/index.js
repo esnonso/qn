@@ -1,12 +1,52 @@
+import { useEffect, useContext, useState } from "react";
 import Container from "../Containers/container";
 import Header from "../Header";
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, useNavigate } from "react-router-dom";
+import { AuthContext } from "../Context/auth";
 import "./index.css";
 
 const AdminPortal = () => {
+  const authCtx = useContext(AuthContext);
+  const navigate = useNavigate();
+  const [loading, loadingComplete] = useState(false);
+  const [name, setName] = useState("");
+
+  const checkIfIsAdmin = async () => {
+    try {
+      const res = await fetch("http://localhost:5002/api/profile", {
+        headers: {
+          Authorization: `Bearer ${authCtx.token}`,
+        },
+      });
+      if (!res.ok) {
+        throw new Error("An error occured!");
+      }
+      return res.json();
+    } catch (err) {
+      navigate("/", { replace: true });
+    }
+  };
+
+  useEffect(() => {
+    checkIfIsAdmin().then((data) => {
+      if (data.role !== "Administrator" && data.role !== "admin")
+        navigate("/", { replace: true });
+      else if (data.role === "Administrator" || data.role === "admin")
+        loadingComplete(true);
+      setName(data.name);
+    });
+  }, [loading]);
   return (
     <>
       <Header color="black" />
+      {!loading && (
+        <div className="loader-container">
+          <span className="loader"></span>
+          <p style={{ width: "fit-content", fontSize: "larger" }}>
+            Confirming admin status
+          </p>
+        </div>
+      )}
       <Container width="100%" height="110vh">
         <Container width="25%" color="black" height="100%" textColor="white">
           <ul className="nav-admin">
@@ -21,7 +61,16 @@ const AdminPortal = () => {
             </Link>
           </ul>
         </Container>
-        <Container width="75%">
+        <Container width="75%" flex="column">
+          <p
+            style={{
+              textAlign: "center",
+              fontSize: "larger",
+              margin: "0.5rem",
+            }}
+          >
+            Welcome {name}!
+          </p>
           <Outlet />
         </Container>
       </Container>

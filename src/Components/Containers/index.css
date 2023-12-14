@@ -18,6 +18,10 @@
     background-blend-mode:multiply;
 }
 
+.container{
+    box-sizing: border-box;
+}
+
 @media screen and (min-width: 750px) and (max-width:1092px) {
     .cont{
         background-size: 50%;

@@ -1,6 +1,6 @@
 import { createPortal } from "react-dom";
 import { BackDropPortal } from "../../MobileNavigator";
-import RegisterComponent from "../auth/register";
+import RegisterComponent from "../auth/registerAdmin";
 
 const RegisterFormPortal = (props) => {
   return createPortal(

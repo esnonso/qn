@@ -13,7 +13,9 @@ const PrintRecentVideos = ({ videos }) => {
   };
 
   useEffect(() => {
-    putVideosInBatches();
+    if (videos) {
+      putVideosInBatches();
+    }
   }, []);
 
   const decreasePageHandler = () => {

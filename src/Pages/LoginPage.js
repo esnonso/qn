@@ -1,4 +1,4 @@
-import LoginComponent from "../Components/admin/auth/login";
+import LoginComponent from "../Components/Auth/login";
 
 const LoginPage = () => {
   return <LoginComponent />;

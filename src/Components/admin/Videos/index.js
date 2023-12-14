@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import Container from "../../Containers/container";
 import AddVideo from "./addVideos";
 import Button from "../../Button";
@@ -7,9 +7,12 @@ import Modal from "../../Modal";
 import { PTags } from "../../Text";
 import ErrorModal from "../../Error/errorModal";
 import { paginate } from "../../Functions";
+import EditVideoForm from "./EditVideoForm";
+import { AuthContext } from "../../Context/auth";
 import "../index.css";
 
 const ManageVideos = () => {
+  const authCtx = useContext(AuthContext);
   const [addNewVideo, showAddNewPostForm] = useState(false);
   const [editForm, showEdit] = useState(false);
   const [itemToBeEdited, setItemToBeEdited] = useState("");
@@ -52,10 +55,14 @@ const ManageVideos = () => {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${authCtx.token}`,
         },
       });
       ShowDeleteWarning(false);
-      if (!response.ok) throw new Error("Could not delete, An error occured!");
+      if (!response.ok) {
+        const err = await response.json();
+        throw new Error(err.message);
+      }
       ShowActionWarning(true);
     } catch (err) {
       showError(err.message);
@@ -76,7 +83,7 @@ const ManageVideos = () => {
     setPage((prevState) => prevState + 1);
   };
   return (
-    <Container flex="column" padding="1rem 0 0 0.2rem" width="100%">
+    <Container flex="column" padding="0.5rem 0 0 0.2rem" width="100%">
       <Container justify="flex-end" padding="0.8rem">
         <Button
           text="Add Videos"
@@ -86,12 +93,16 @@ const ManageVideos = () => {
           height="2.5rem"
           borderRadius="5px"
           font="18px"
-          margin="0 0 1rem 0"
+          margin="0 0 0.5rem 0"
           click={showAddNewVideoHandler}
         />
       </Container>
-      {addNewVideo && <AddVideo onHide={hideAddNewVideoHandler} />}
-
+      {addNewVideo && (
+        <AddVideo onHide={hideAddNewVideoHandler} data={"ahahha"} />
+      )}
+      {editForm && (
+        <EditVideoForm data={itemToBeEdited} onHide={hideEditModalHandler} />
+      )}
       {batch.length > 0 &&
         batch[page].map((d) => (
           <div key={d._id} className="view-stories-container">
@@ -107,6 +118,7 @@ const ManageVideos = () => {
                 margin={"0 0.2rem 0 0"}
                 width="4rem"
                 font="18px"
+                click={() => showEditModalHandler(d)}
               />
               <Button
                 text="Delete"
@@ -127,8 +139,7 @@ const ManageVideos = () => {
           text="Previous"
           back="black"
           color="#D1BB71"
-          font="large"
-          borderRadius={"5px"}
+          borderRadius={"3px"}
           margin={"0 0.2rem 0 0"}
           width="6rem"
           click={decreasePageHandler}
@@ -139,8 +150,7 @@ const ManageVideos = () => {
             key={i}
             back="black"
             color="#D1BB71"
-            font="large"
-            borderRadius={"5px"}
+            borderRadius={"3px"}
             margin={"0 0.2rem 0 0"}
           />
         ))}
@@ -148,8 +158,7 @@ const ManageVideos = () => {
           text="Next"
           back="black"
           color="#D1BB71"
-          font="large"
-          borderRadius={"5px"}
+          borderRadius={"3px"}
           margin={"0 0.2rem 0 0"}
           width="6rem"
           click={increasePageHandler}

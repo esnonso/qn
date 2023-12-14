@@ -26,7 +26,7 @@
     position: fixed;
     left: 5%;
     width: 90%;
-    top: 3rem;
+    top: 1rem;
     z-index: 2;
     animation-name: examples;
     animation-duration: 1s;
@@ -63,15 +63,26 @@ textarea{
 .view-stories-container{
     display: flex;
     width: 100%;
+    flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 0.5rem;
-    height:3rem;
+    margin-bottom: 0.5rem;  
     padding-left: 0.2rem;
     margin:0 0 0.4rem 0;
     box-sizing: border-box;
     font-size: large;
 }
+
+.stories-p{
+    width: 100%; 
+    font-size: 18px; 
+    font-weight: 600;
+ }
+
+ .view-stories-container div{
+    width: 100%;
+    text-align: left;
+ }
 
 .view-stories-container a{
     margin: 0.5rem;
@@ -102,6 +113,66 @@ textarea{
     color:black;
 }
 
+.loader-container {
+    background-color: #e8e9eb;
+    z-index: 3;
+    height: 100%;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    color: black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.loader {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    position: relative;
+    animation: rotate 1s linear infinite
+}
+
+.loader::before {
+    content: "";
+    box-sizing: border-box;
+    position: absolute;
+    inset: 0px;
+    border-radius: 50%;
+    border: 5px solid black;
+    animation: prixClipFix 2s linear infinite;
+}
+
+@keyframes rotate {
+    100% {
+        transform: rotate(360deg)
+    }
+}
+
+@keyframes prixClipFix {
+    0% {
+        clip-path: polygon(50% 50%, 0 0, 0 0, 0 0, 0 0, 0 0)
+    }
+
+    25% {
+        clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 0, 100% 0, 100% 0)
+    }
+
+    50% {
+        clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 100%, 100% 100%, 100% 100%)
+    }
+
+    75% {
+        clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 100%, 0 100%, 0 100%)
+    }
+
+    100% {
+        clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 100%, 0 100%, 0 0)
+    }
+}
+
 @media screen and (min-width:800px) {
     .post-form-container{
         width: 80%;
@@ -110,6 +181,21 @@ textarea{
 
     .form-control-post{
         width: 80%;
+    }
+
+    .view-stories-container{
+        flex-direction: row;
+    }
+
+    .stories-p {
+        width: 80%;
+        font-size: 18px;
+        font-weight: 600;
+    }
+
+    .view-stories-container div {
+        width: 20%;
+        text-align: left;
     }
 }
 

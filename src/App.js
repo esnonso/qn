@@ -3,15 +3,18 @@ import {
   RouterProvider,
   //redirect,
 } from "react-router-dom";
+import AuthContextProvider from "./Components/Context/auth";
 import Homepage from "./Pages/Homepage";
 import AboutPage from "./Pages/AboutPage";
 import LoginPage from "./Pages/LoginPage";
 import AdminPage from "./Pages/Dashboard";
 import CreatePosts from "./Components/admin/Posts";
-import SinglePost from "./Pages/SinglePost";
+import SinglePost from "./Components/Posts/SinglePost";
+import RegisterPage from "./Pages/RegisterPage";
 import ManageVideos from "./Components/admin/Videos";
 import ViewUsers from "./Components/admin/users";
-import ErrorHandler from "./Components/Error";
+import ErrorModal from "./Components/Error/errorModal";
+import Profile from "./Pages/Profile";
 import {
   storiesApiCalls,
   userApiCalls,
@@ -19,6 +22,8 @@ import {
   videosApiCalls,
   fetchVideos,
   fetchPostsAndVideos,
+  fetchAdmins,
+  sendComments,
 } from "./Components/apiHandlers";
 
 const router = createBrowserRouter([
@@ -26,17 +31,23 @@ const router = createBrowserRouter([
     path: "/",
     element: <Homepage />,
     loader: fetchPostsAndVideos,
-    errorElement: <ErrorHandler />,
+    errorElement: <ErrorModal />,
   },
   { path: "/aboutus", element: <AboutPage /> },
-  { path: "/singlepost", element: <SinglePost /> },
+  { path: "/post/:id", element: <SinglePost />, action: sendComments },
   {
     path: "/home",
     element: <Homepage />,
     loader: fetchPostsAndVideos,
-    errorElement: <ErrorHandler />,
+    errorElement: <ErrorModal />,
   },
   { path: "/login", element: <LoginPage />, action: loginUser },
+  { path: "/profile", element: <Profile />, errorElement: <ErrorModal /> },
+  {
+    path: "/register",
+    element: <RegisterPage />,
+    action: userApiCalls,
+  },
   {
     path: "/dashboard",
     element: <AdminPage />,
@@ -52,14 +63,23 @@ const router = createBrowserRouter([
         action: videosApiCalls,
         loader: fetchVideos,
       },
-      { path: "users", element: <ViewUsers />, action: userApiCalls },
+      {
+        path: "users",
+        element: <ViewUsers />,
+        action: userApiCalls,
+        loader: fetchAdmins,
+      },
     ],
-    errorElement: <ErrorHandler />,
+    errorElement: <ErrorModal />,
   },
 ]);
 
 function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <AuthContextProvider>
+      <RouterProvider router={router} />
+    </AuthContextProvider>
+  );
 }
 
 export default App;

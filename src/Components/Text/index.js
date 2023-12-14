@@ -24,9 +24,10 @@ export const PTags = (props) => {
     fontSize: props.fontSize,
     padding: props.padding,
     fontWeight: props.fontWeight,
-    textAlign: props.textAlign,
     display: "flex",
-    alignItems: "center",
+    alignItems: props.align || "center",
+    backgroundColor: props.back,
+    textAlign: props.textAlign,
     boxSing: "border-box",
   };
   return (
