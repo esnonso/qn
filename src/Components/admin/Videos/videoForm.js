@@ -1,14 +1,19 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import "../index.css";
 import { H1Tags } from "../../Text";
 import Button from "../../Button";
 import Container from "../../Containers/container";
+import { AuthContext } from "../../Context/auth";
 
 const VideoForm = (props) => {
   const [topic, setTopic] = useState("");
   const [title, setTitle] = useState("");
   const [video, setVideo] = useState("");
+  const [trending, setTrending] = useState("No");
   const [pending, setPending] = useState(false);
+  const [error, setError] = useState(false);
+  const [message, setMessage] = useState(false);
+  const authCtx = useContext(AuthContext);
 
   const inputChangeHandler = (setState) => (e) => {
     setState(e.target.value);
@@ -20,23 +25,31 @@ const VideoForm = (props) => {
 
   const submitHandler = async (e) => {
     e.preventDefault();
+    setError("");
+    setMessage("");
     setPending(true);
     let formData = new FormData();
     formData.append("video", video);
     formData.append("title", title);
     formData.append("topic", topic);
-
+    formData.append("trending", trending);
     try {
       const response = await fetch("http://localhost:5002/api/videos", {
         method: "POST",
         body: formData,
+        headers: {
+          Authorization: `Bearer ${authCtx.token}`,
+        },
       });
-      if (!response.ok) throw new Error("An error occured try again");
+      if (!response.ok) {
+        const error = await response.json();
+        throw new Error(error.message);
+      }
       alert("success");
-      setPending(false);
-      return "Post created sucessfully";
+      window.location.reload();
     } catch (err) {
-      console.log(err);
+      setError(err.message);
+      setPending(false);
     }
   };
 
@@ -64,6 +77,8 @@ const VideoForm = (props) => {
         Add Video
       </H1Tags>
       <div className="form-control-post">
+        {error && <small className="error">{error}</small>}
+        {message && <small className="success">{message}</small>}
         <label>Topic</label>
         <select
           name="topic"
@@ -85,6 +100,18 @@ const VideoForm = (props) => {
           value={title}
           onChange={inputChangeHandler(setTitle)}
         />
+      </div>
+
+      <div className="form-control-post">
+        <label>Make trending</label>
+        <select
+          name="trending"
+          value={trending}
+          onChange={inputChangeHandler(setTrending)}
+        >
+          <option>No</option>
+          <option>Yes</option>
+        </select>
       </div>
 
       <div className="form-control-post">

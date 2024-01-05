@@ -1,6 +1,8 @@
 import { createPortal } from "react-dom";
+import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { NavItems } from "../../Objects";
+import { AuthContext } from "../Context/auth";
 import "./index.css";
 
 const BackDrop = () => {
@@ -12,6 +14,8 @@ export const BackDropPortal = () => {
 };
 
 const Sidebar = (props) => {
+  const authCtx = useContext(AuthContext);
+
   return (
     <div className="sidebar">
       <button className="close-nav-btn" onClick={props.onClose}>
@@ -19,11 +23,25 @@ const Sidebar = (props) => {
       </button>
       {NavItems.map((l, i) => (
         <li key={`b${i}`}>
-          <Link to={`/${l.replace(/\s/g, "").toLowerCase()}`}>
+          <Link
+            to={`/${l.replace(/\s/g, "").toLowerCase()}`}
+            onClick={props.onClose}
+          >
             {l.trim().toUpperCase()}
           </Link>
         </li>
       ))}
+      <li>
+        {authCtx.token === "" ? (
+          <Link to="/login" onClick={props.onClose}>
+            LOGIN
+          </Link>
+        ) : (
+          <Link to="/profile" onClick={props.onClose}>
+            PROFILE
+          </Link>
+        )}
+      </li>
     </div>
   );
 };

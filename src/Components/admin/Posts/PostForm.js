@@ -1,15 +1,20 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import "../index.css";
 import { H1Tags } from "../../Text";
 import Button from "../../Button";
 import Container from "../../Containers/container";
+import { AuthContext } from "../../Context/auth";
 
 const PostForm = (props) => {
   const [topic, setTopic] = useState("");
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
+  const [trending, setTrending] = useState("No");
   const [image, setImage] = useState("");
   const [pending, setPending] = useState(false);
+  const [error, setError] = useState(false);
+  const [message, setMessage] = useState(false);
+  const authCtx = useContext(AuthContext);
 
   const inputChangeHandler = (setState) => (e) => {
     setState(e.target.value);
@@ -20,6 +25,8 @@ const PostForm = (props) => {
   };
 
   const submitHandler = async (e) => {
+    setError("");
+    setMessage("");
     e.preventDefault();
     // var imagedata = document.querySelector('input[type="file"]').files[0];
     // console.log(imagedata);
@@ -29,20 +36,25 @@ const PostForm = (props) => {
     formData.append("title", title);
     formData.append("topic", topic);
     formData.append("body", body);
+    formData.append("trending", trending);
     try {
       const response = await fetch("http://localhost:5002/api/stories", {
         method: "POST",
-        // headers: {
-        //   "Content-Type": "application/json",
-        // },
+        headers: {
+          Authorization: `Bearer ${authCtx.token}`,
+        },
         body: formData,
       });
-      if (!response.ok) throw new Error("An error occured try again");
-      alert("success");
+      if (!response.ok) {
+        const error = await response.json();
+        throw new Error(error.message);
+      }
       setPending(false);
-      return "Post created sucessfully";
+      alert("success");
+      window.location.reload();
     } catch (err) {
-      console.log(err);
+      setError(err.message);
+      setPending(false);
     }
   };
   return (
@@ -67,7 +79,10 @@ const PostForm = (props) => {
       <H1Tags textAlign="center" margin="0.2rem 0" fontSize="20px">
         Add Posts
       </H1Tags>
+
       <div className="form-control-post">
+        {error && <small className="error">{error}</small>}
+        {message && <small className="success">{message}</small>}
         <label>Topic</label>
         <select
           name="topic"
@@ -99,6 +114,18 @@ const PostForm = (props) => {
           value={body}
           onChange={inputChangeHandler(setBody)}
         ></textarea>
+      </div>
+
+      <div className="form-control-post">
+        <label>Make trending</label>
+        <select
+          name="trending"
+          value={trending}
+          onChange={inputChangeHandler(setTrending)}
+        >
+          <option>No</option>
+          <option>Yes</option>
+        </select>
       </div>
 
       <div className="form-control-post">

@@ -3,6 +3,7 @@ import Header from "../Components/Header";
 import { H1Tags, PTags } from "../Components/Text";
 import Image from "../Images/pica.png";
 import Footer from "../Components/Footer";
+import "./aboutpage.css"
 
 const AboutPage = () => {
   return (
@@ -13,13 +14,13 @@ const AboutPage = () => {
         <div className="pic">
           <img src={Image} alt="" />
           <div className="about-text">
-           <H1Tags color="black" margin="5rem 0 0 23rem">
+           <H1Tags className="about-text" color="black" margin="5rem 0 0  0">
               About Us
             </H1Tags>
 
-            <strong/><H1Tags color="black" margin="3rem 0 0 0">
+            <H1Tags color="black" margin="3rem 0 0 0">
               Our Founder
-            </H1Tags><strong/> 
+            </H1Tags> 
             <PTags>
             Queen Nwosu is a legal educator and consultant with several years experience in legal education and
             services. She is a seasoned professional who has leveraged on her extensive expertise to establish a

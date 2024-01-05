@@ -45,8 +45,23 @@ code {
   border-radius: 2px;
 }
 
+.error {
+  color: #884b4b;
+  border: 1px solid #884b4b;
+  background: #f5bcbc;
+  padding: 0.3rem;
+  border-radius: 5px;
+}
+
+.success{
+  color: #155724;
+  border: 1px solid #155724;
+  background: #D4EDDA;
+  padding: 0.3rem;
+}
+
 .pic {
-  height: 100%;
+  height: 30%;
   width: 100%;
   text-align: left;
 }
@@ -86,6 +101,8 @@ code {
     }
 
 }
+
+
 
 @media screen and (min-width:700px) and (max-width:914px){
   .recent-cont-posts{

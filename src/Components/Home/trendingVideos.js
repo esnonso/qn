@@ -11,42 +11,44 @@ const PrintTrendingVideos = ({ videos }) => {
   const [chunkedVideos, setChunkedVideos] = useState([]);
 
   useEffect(() => {
-    const phone = window.matchMedia("(max-width: 700px)");
-    const tab = window.matchMedia(
-      "(min-width: 701px) and ((max-width: 1016px)"
-    );
-    const desktop = window.matchMedia("(min-width: 1016px)");
-    if (videos.length >= 3) {
-      if (phone.matches && videos.length >= 3) {
-        const joinedArr = [];
-        for (var i = 0; i < 3; i++) {
-          joinedArr.push([videos[i]]);
-        }
-        setChunkedVideos(joinedArr);
-      }
-      if (tab.matches && videos.length >= 6) {
-        const joinedArr = [];
-        for (i = 0; i < 6; i++) {
-          const lastItem = joinedArr[joinedArr.length - 1];
-          if (!lastItem || lastItem.length === 2) {
+    if (videos) {
+      const phone = window.matchMedia("(max-width: 700px)");
+      const tab = window.matchMedia(
+        "(min-width: 701px) and ((max-width: 1016px)"
+      );
+      const desktop = window.matchMedia("(min-width: 1016px)");
+      if (videos.length >= 3) {
+        if (phone.matches && videos.length >= 3) {
+          const joinedArr = [];
+          for (var i = 0; i < 3; i++) {
             joinedArr.push([videos[i]]);
-          } else {
-            lastItem.push(videos[i]);
           }
+          setChunkedVideos(joinedArr);
         }
-        setChunkedVideos(joinedArr);
-      }
-      if (desktop.matches && videos.length >= 9) {
-        const joinedArr = [];
-        for (i = 0; i < 9; i++) {
-          const lastItem = joinedArr[joinedArr.length - 1];
-          if (!lastItem || lastItem.length === 3) {
-            joinedArr.push([videos[i]]);
-          } else {
-            lastItem.push(videos[i]);
+        if (tab.matches && videos.length >= 6) {
+          const joinedArr = [];
+          for (i = 0; i < 6; i++) {
+            const lastItem = joinedArr[joinedArr.length - 1];
+            if (!lastItem || lastItem.length === 2) {
+              joinedArr.push([videos[i]]);
+            } else {
+              lastItem.push(videos[i]);
+            }
           }
+          setChunkedVideos(joinedArr);
         }
-        setChunkedVideos(joinedArr);
+        if (desktop.matches && videos.length >= 9) {
+          const joinedArr = [];
+          for (i = 0; i < 9; i++) {
+            const lastItem = joinedArr[joinedArr.length - 1];
+            if (!lastItem || lastItem.length === 3) {
+              joinedArr.push([videos[i]]);
+            } else {
+              lastItem.push(videos[i]);
+            }
+          }
+          setChunkedVideos(joinedArr);
+        }
       }
     }
   }, [screenSize]);

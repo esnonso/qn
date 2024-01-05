@@ -21,6 +21,7 @@ const Button = ({
     borderRadius: borderRadius,
     fontSize: font,
     margin: margin,
+    font: "inherit",
   };
   return (
     <button style={buttonStyles} onClick={click} type={type}>

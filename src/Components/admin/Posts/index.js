@@ -1,4 +1,5 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import { AuthContext } from "../../Context/auth";
 import { fetchPosts } from "../../apiHandlers";
 import Container from "../../Containers/container";
 import AddPosts from "./addPosts";
@@ -20,6 +21,7 @@ const CreatePosts = () => {
   const [actionWarning, ShowActionWarning] = useState(false);
   const [idTobeDeleted, setIdToBeDeleted] = useState(false);
   const [error, showError] = useState("");
+  const authCtx = useContext(AuthContext);
 
   const putPostsInBatches = async () => {
     const data = await fetchPosts();
@@ -53,10 +55,14 @@ const CreatePosts = () => {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${authCtx.token}`,
         },
       });
       ShowDeleteWarning(false);
-      if (!response.ok) throw new Error("Could not delete, An error occured!");
+      if (!response.ok) {
+        const err = await response.json();
+        throw new Error(err.message);
+      }
       ShowActionWarning(true);
     } catch (err) {
       showError(err.message);
@@ -77,16 +83,16 @@ const CreatePosts = () => {
     setPage((prevState) => prevState + 1);
   };
   return (
-    <Container flex="column" padding="1rem 0 0 0.2rem" width="100%">
+    <Container flex="column" padding="0.5rem 0 0 0.2rem" width="100%">
       <Container justify="flex-end" padding="0.8rem">
         <Button
           text="Add Posts"
           color="#D1BB71"
           back={"black"}
           width="10rem"
-          height="3rem"
+          height="2.5rem"
           borderRadius="5px"
-          font="larger"
+          font="large"
           margin="0 0 0.5rem 0"
           click={showaddNewPostHandler}
         />
@@ -98,10 +104,8 @@ const CreatePosts = () => {
       {batch.length > 0 &&
         batch[page].map((d, i) => (
           <div key={d._id} className="view-stories-container">
-            <p style={{ width: "80%", fontSize: "18px", fontWeight: 600 }}>
-              ★ {d.title}
-            </p>
-            <div style={{ width: "20%" }}>
+            <p className="stories-p">★ {d.title}</p>
+            <div>
               <Button
                 text="Edit"
                 back="white"
@@ -129,8 +133,7 @@ const CreatePosts = () => {
           text="Previous"
           back="black"
           color="#D1BB71"
-          font="large"
-          borderRadius={"5px"}
+          borderRadius={"3px"}
           margin={"0 0.2rem 0 0"}
           width="6rem"
           click={decreasePageHandler}
@@ -141,8 +144,7 @@ const CreatePosts = () => {
             key={i}
             back="black"
             color="#D1BB71"
-            font="large"
-            borderRadius={"5px"}
+            borderRadius={"3px"}
             margin={"0 0.2rem 0 0"}
           />
         ))}
@@ -150,8 +152,7 @@ const CreatePosts = () => {
           text="Next"
           back="black"
           color="#D1BB71"
-          font="large"
-          borderRadius={"5px"}
+          borderRadius={"3px"}
           margin={"0 0.2rem 0 0"}
           width="6rem"
           click={increasePageHandler}

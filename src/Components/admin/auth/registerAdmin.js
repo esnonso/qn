@@ -1,10 +1,14 @@
-import { Form } from "react-router-dom";
+import { Form, useActionData, useNavigation } from "react-router-dom";
 import "../index.css";
 import Container from "../../Containers/container";
 import Button from "../../Button";
 import { H1Tags } from "../../Text";
 
 const RegisterComponent = (props) => {
+  const navigation = useNavigation();
+  const isSumbmitting = navigation.state === "submitting";
+  const data = useActionData();
+
   return (
     <Form method="POST" className="post-form-container">
       <Container justify="flex-end">
@@ -24,6 +28,12 @@ const RegisterComponent = (props) => {
         Add User
       </H1Tags>
       <div className="form-control-post">
+        {data && data.error && (
+          <small style={{ color: "red" }}>Error: {data.message}</small>
+        )}
+        {data && !data.error && (
+          <small style={{ color: "green" }}>Sucess: {data.message}</small>
+        )}
         <label>Email</label>
         <input type="text" name="email" />
       </div>
@@ -41,16 +51,18 @@ const RegisterComponent = (props) => {
         <input type="text" name="lastname" />
       </div>
       <div className="form-control-post">
-        <Button
-          text="Add"
-          color="#D1BB71"
-          back={"black"}
-          width="10rem"
-          height="3rem"
-          borderRadius="5px"
-          font="large"
-          type="submit"
-        />
+        <label>Role</label>
+        <select name="status">
+          <option>--Select--</option>
+          <option>admin</option>
+          <option>user</option>
+        </select>
+      </div>
+      <input type="checkbox" name="terms" checked readOnly className="hidden" />
+      <div className="form-control-post">
+        <button type="submit" disabled={isSumbmitting} className="submit-btn">
+          {isSumbmitting ? "..." : "Submit"}
+        </button>
       </div>
     </Form>
   );

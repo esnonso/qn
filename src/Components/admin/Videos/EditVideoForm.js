@@ -5,16 +5,15 @@ import { H1Tags } from "../../Text";
 import Button from "../../Button";
 import Container from "../../Containers/container";
 
-const EditPostForm = (props) => {
+const EditVideoForm = (props) => {
   const data = useActionData();
   const navigation = useNavigation();
   const isSumbmitting = navigation.state === "submitting";
   const [topic, setTopic] = useState(props.data.topic);
   const [title, setTitle] = useState(props.data.title);
-  const [body, setBody] = useState(props.data.slug);
   const [trending, setTrending] = useState(props.data.trending);
 
-  const handleChange = (setState) => (e) => {
+  const inputChangeHandler = (setState) => (e) => {
     setState(e.target.value);
   };
 
@@ -30,11 +29,11 @@ const EditPostForm = (props) => {
           borderRadius="5px"
           font="larger"
           type="button"
-          click={props.onClose}
+          click={props.onHide}
         />
       </Container>
       <H1Tags textAlign="center" margin="0.2rem 0" fontSize="20px">
-        Edit {title}
+        Add Video
       </H1Tags>
       <div className="form-control-post">
         {data && data.error && (
@@ -45,13 +44,16 @@ const EditPostForm = (props) => {
         )}
         <label>ID</label>
         <input type="text" name="id" value={props.data._id} readOnly />
-      </div>
-      <div className="form-control-post">
         <label>Topic</label>
-        <select name="topic" value={topic} onChange={handleChange(setTopic)}>
-          <option>Poetry</option>
-          <option>Video</option>
-          <option>Movie</option>
+        <select
+          name="topic"
+          value={topic}
+          onChange={inputChangeHandler(setTopic)}
+        >
+          <option>--Select--</option>
+          <option>News</option>
+          <option>Health</option>
+          <option>Technology</option>
         </select>
       </div>
 
@@ -61,7 +63,7 @@ const EditPostForm = (props) => {
           type="text"
           name="title"
           value={title}
-          onChange={handleChange(setTitle)}
+          onChange={inputChangeHandler(setTitle)}
         />
       </div>
 
@@ -70,22 +72,13 @@ const EditPostForm = (props) => {
         <select
           name="trending"
           value={trending}
-          onChange={handleChange(setTrending)}
+          onChange={inputChangeHandler(setTrending)}
         >
           <option>No</option>
           <option>Yes</option>
         </select>
       </div>
 
-      <div className="form-control-post">
-        <label>Description</label>
-        <textarea
-          type="text"
-          name="body"
-          value={body}
-          onChange={handleChange(setBody)}
-        ></textarea>
-      </div>
       <div className="form-control-post">
         <button type="submit" disabled={isSumbmitting} className="submit-btn">
           {isSumbmitting ? "..." : "Submit"}
@@ -95,4 +88,4 @@ const EditPostForm = (props) => {
   );
 };
 
-export default EditPostForm;
+export default EditVideoForm;

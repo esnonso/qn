@@ -1,34 +1,49 @@
+import { json, redirect } from "react-router-dom";
+const token = localStorage.getItem("token");
 export const storiesApiCalls = async ({ request }) => {
   switch (request.method) {
-    case "PUT":
-      {
-        let formData = await request.formData();
-        const title = formData.get("title");
-        const body = formData.get("body");
-        const topic = formData.get("topic");
-        const id = formData.get("id");
-        try {
-          const response = await fetch(
-            "http://localhost:5002/api/stories/" + id,
-            {
-              method: "PUT",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify({ title, body, topic }),
-            }
-          );
-          if (!response.ok) throw new Error("An error occured try again");
-          alert("success");
-          return "Post edit sucessfully";
-        } catch (err) {
-          console.log(err);
+    case "PUT": {
+      let formData = await request.formData();
+      const title = formData.get("title");
+      const body = formData.get("body");
+      const topic = formData.get("topic");
+      const id = formData.get("id");
+      const trending = formData.get("trending");
+      try {
+        const response = await fetch(
+          "http://localhost:5002/api/stories/" + id,
+          {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+            body: JSON.stringify({ title, body, topic, trending }),
+          }
+        );
+        if (!response.ok) {
+          const error = await response.json();
+          return { error: true, message: error.message };
         }
+        alert("sucess!");
+        window.location.reload();
+        return redirect("/dashboard");
+      } catch (err) {
+        throw json({ status: 400 }, { message: err.message });
       }
-      break;
+    }
+
     default:
       return;
   }
+};
+
+const validateEmail = (email) => {
+  return String(email)
+    .toLowerCase()
+    .match(
+      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    );
 };
 
 export const userApiCalls = async ({ request }) => {
@@ -38,19 +53,41 @@ export const userApiCalls = async ({ request }) => {
       const name = `${formData.get("firstname")} ${formData.get("lastname")}`;
       const email = formData.get("email");
       const password = formData.get("password");
+      const status = formData.get("status");
+      const terms = formData.get("terms");
+
+      if (!email || !validateEmail(email))
+        return { error: true, message: "Invalid Email" };
+      if (formData.get("firstname").length < 2)
+        return { error: true, message: "First Name is required" };
+      if (formData.get("lastname").length < 2)
+        return { error: true, message: "Last Name is required" };
+      if (password.length < 7)
+        return {
+          error: true,
+          message: "Password should have up to seven characters",
+        };
+
       try {
+        if (!terms)
+          return { error: true, message: "Accept terms and condition" };
         const response = await fetch("http://localhost:5002/auth/register", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ name, email, password }),
+          body: JSON.stringify({ name, email, password, status }),
         });
-        if (!response.ok) throw new Error("An error occured try again");
-        alert("success");
-        return "User created sucessfully, check your email for verification";
+        if (!response.ok) {
+          const error = await response.json();
+          return { error: true, message: error.message };
+        }
+        return {
+          message:
+            "User created sucessfully, check your email for verification",
+        };
       } catch (err) {
-        throw err;
+        throw json({ status: 400 }, { message: err.message });
       }
     }
     default:
@@ -72,9 +109,9 @@ export const loginUser = async ({ request }) => {
     });
     if (!response.ok) throw new Error("Invalid username or password");
     const data = await response.json();
-    console.log(data);
-    alert("success");
-    return data;
+    localStorage.setItem("token", data.token);
+    await window.location.reload();
+    return redirect("/");
   } catch (err) {
     throw err;
   }
@@ -105,27 +142,6 @@ export const fetchVideos = async () => {
 
 export const videosApiCalls = async ({ request }) => {
   switch (request.method) {
-    case "POST": {
-      let formData = await request.formData();
-      const title = formData.get("title");
-      const videoUrl = formData.get("videoUrl");
-      const topic = formData.get("topic");
-      const slug = title;
-      try {
-        const response = await fetch("http://localhost:5002/api/videos", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ title, videoUrl, topic, slug }),
-        });
-        if (!response.ok) throw new Error("An error occured try again");
-        alert("success");
-        return "Post created sucessfully";
-      } catch (err) {
-        throw err;
-      }
-    }
     case "PUT": {
       let formData = await request.formData();
       const title = formData.get("title");
@@ -134,21 +150,23 @@ export const videosApiCalls = async ({ request }) => {
       const topic = formData.get("topic");
       const id = formData.get("id");
       try {
-        const response = await fetch(
-          "http://localhost:5002/api/stories/" + id,
-          {
-            method: "PUT",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ title, imageUrl, body, topic }),
-          }
-        );
-        if (!response.ok) throw new Error("An error occured try again");
-        alert("success");
+        const response = await fetch("http://localhost:5002/api/videos/" + id, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({ title, imageUrl, body, topic }),
+        });
+
+        if (!response.ok) {
+          const error = await response.json();
+          return { error: true, message: error.message };
+        }
+        await window.location.reload();
         return "Post edit sucessfully";
       } catch (err) {
-        throw err;
+        throw json({ status: 400 }, { message: err.message });
       }
     }
     default:
@@ -162,6 +180,53 @@ export const fetchPostsAndVideos = async () => {
     const videos = await fetchVideos();
     return { posts, videos };
   } catch {
-    return "An error occured fetching data";
+    throw json(
+      { message: "Server down. An error occured fetching blogs" },
+      { status: 500 }
+    );
+  }
+};
+
+export const fetchAdmins = async () => {
+  try {
+    const response = await fetch("http://localhost:5002/api/admins", {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    if (!response.ok) {
+      const error = await response.json();
+      return { error: true, message: error.message };
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    throw json({ status: 400 }, { message: error.message });
+  }
+};
+
+export const sendComments = async ({ request }) => {
+  let formData = await request.formData();
+  const comment = formData.get("comment");
+  const id = formData.get("id");
+  try {
+    const response = await fetch("http://localhost:5002/api/comments", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({ comment, id }),
+    });
+    if (!response.ok) {
+      const error = await response.json();
+      return { error: true, message: error.message };
+    }
+    return {
+      message: "Comment Added!",
+    };
+  } catch (err) {
+    throw json({ status: 400 }, { message: err.message });
   }
 };

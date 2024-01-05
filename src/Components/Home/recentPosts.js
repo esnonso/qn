@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import Container from "../Containers/container";
 import { H1Tags, PTags } from "../Text";
 import ContainerFlexColumn from "../Containers/container-flex-column";
@@ -9,12 +10,14 @@ const PrintRecentPosts = ({ posts }) => {
   const [page, setPage] = useState(0);
   const [batch, setBatch] = useState([]);
 
-  const putVideosInBatches = async () => {
+  const putPostsInBatches = async () => {
     setBatch(paginate(posts));
   };
 
   useEffect(() => {
-    putVideosInBatches();
+    if (posts) {
+      putPostsInBatches();
+    }
   }, []);
 
   const decreasePageHandler = () => {
@@ -46,7 +49,9 @@ const PrintRecentPosts = ({ posts }) => {
                 </PTags>
                 <p>
                   {i.body.slice(0, 160)}...{" "}
-                  <button className="btn">Read more</button>
+                  <Link to={`/post/${i._id}`} className="btn">
+                    Read more
+                  </Link>
                 </p>
               </Container>
             </ContainerFlexColumn>

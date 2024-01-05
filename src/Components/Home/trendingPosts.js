@@ -16,37 +16,39 @@ const PrintTrendingPosts = ({ posts }) => {
       "(min-width: 701px) and ((max-width: 1016px)"
     );
     const desktop = window.matchMedia("(min-width: 1016px)");
-    if (posts.length >= 3) {
-      if (phone.matches && posts.length >= 3) {
-        const joinedArr = [];
-        for (var i = 0; i < 3; i++) {
-          joinedArr.push([posts[i]]);
-        }
-        setChunkedPosts(joinedArr);
-      }
-      if (tab.matches && posts.length >= 6) {
-        const joinedArr = [];
-        for (i = 0; i < 6; i++) {
-          const lastItem = joinedArr[joinedArr.length - 1];
-          if (!lastItem || lastItem.length === 2) {
+    if (posts) {
+      if (posts.length >= 3) {
+        if (phone.matches && posts.length >= 3) {
+          const joinedArr = [];
+          for (var i = 0; i < 3; i++) {
             joinedArr.push([posts[i]]);
-          } else {
-            lastItem.push(posts[i]);
           }
+          setChunkedPosts(joinedArr);
         }
-        setChunkedPosts(joinedArr);
-      }
-      if (desktop.matches && posts.length >= 9) {
-        const joinedArr = [];
-        for (i = 0; i < 9; i++) {
-          const lastItem = joinedArr[joinedArr.length - 1];
-          if (!lastItem || lastItem.length === 3) {
-            joinedArr.push([posts[i]]);
-          } else {
-            lastItem.push(posts[i]);
+        if (tab.matches && posts.length >= 6) {
+          const joinedArr = [];
+          for (i = 0; i < 6; i++) {
+            const lastItem = joinedArr[joinedArr.length - 1];
+            if (!lastItem || lastItem.length === 2) {
+              joinedArr.push([posts[i]]);
+            } else {
+              lastItem.push(posts[i]);
+            }
           }
+          setChunkedPosts(joinedArr);
         }
-        setChunkedPosts(joinedArr);
+        if (desktop.matches && posts.length >= 9) {
+          const joinedArr = [];
+          for (i = 0; i < 9; i++) {
+            const lastItem = joinedArr[joinedArr.length - 1];
+            if (!lastItem || lastItem.length === 3) {
+              joinedArr.push([posts[i]]);
+            } else {
+              lastItem.push(posts[i]);
+            }
+          }
+          setChunkedPosts(joinedArr);
+        }
       }
     }
   }, [screenSize]);

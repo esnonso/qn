@@ -16,6 +16,11 @@
     background-position: 100% 100%;
     background-repeat: no-repeat;
     background-blend-mode:multiply;
+    
+}
+
+.container{
+    box-sizing: border-box;
 }
 
 @media screen and (min-width: 750px) and (max-width:1092px) {
@@ -29,7 +34,7 @@
     .cont {
         background-image: url("../../Images/pica.png");
         background-size: 50%;
-        background-position: 108% -80%;
+        background-position: 108% -10%;
     }
     .container-column {
         flex-direction: row;
