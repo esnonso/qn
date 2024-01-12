@@ -9,10 +9,9 @@ const VideoForm = (props) => {
   const [topic, setTopic] = useState("");
   const [title, setTitle] = useState("");
   const [video, setVideo] = useState("");
-  const [trending, setTrending] = useState("No");
   const [pending, setPending] = useState(false);
-  const [error, setError] = useState(false);
-  const [message, setMessage] = useState(false);
+  const [error, setError] = useState("");
+  const [message, setMessage] = useState("");
   const authCtx = useContext(AuthContext);
 
   const inputChangeHandler = (setState) => (e) => {
@@ -28,11 +27,12 @@ const VideoForm = (props) => {
     setError("");
     setMessage("");
     setPending(true);
+
     let formData = new FormData();
     formData.append("video", video);
     formData.append("title", title);
     formData.append("topic", topic);
-    formData.append("trending", trending);
+
     try {
       const response = await fetch("http://localhost:5002/api/videos", {
         method: "POST",
@@ -41,11 +41,14 @@ const VideoForm = (props) => {
           Authorization: `Bearer ${authCtx.token}`,
         },
       });
+
       if (!response.ok) {
-        const error = await response.json();
-        throw new Error(error.message);
+        const errorData = await response.json();
+        throw new Error(errorData.message);
       }
-      alert("success");
+
+      setPending(false);
+      setMessage("Video submitted successfully!");
       window.location.reload();
     } catch (err) {
       setError(err.message);
@@ -57,7 +60,7 @@ const VideoForm = (props) => {
     <form
       className="post-form-container"
       method="POST"
-      encType="multipart-formdata"
+      encType="multipart/form-data"
       onSubmit={submitHandler}
     >
       <Container justify="flex-end">
@@ -85,10 +88,8 @@ const VideoForm = (props) => {
           value={topic}
           onChange={inputChangeHandler(setTopic)}
         >
-          <option>--Select--</option>
-          <option>News</option>
-          <option>Health</option>
-          <option>Technology</option>
+          <option>Select</option>
+          <option>LegaL Education</option>
         </select>
       </div>
 
@@ -103,23 +104,10 @@ const VideoForm = (props) => {
       </div>
 
       <div className="form-control-post">
-        <label>Make trending</label>
-        <select
-          name="trending"
-          value={trending}
-          onChange={inputChangeHandler(setTrending)}
-        >
-          <option>No</option>
-          <option>Yes</option>
-        </select>
-      </div>
-
-      <div className="form-control-post">
         <label>Video</label>
         <input
           type="file"
           name="video"
-          defaultValue={video}
           onChange={videoChangeHandler}
         />
       </div>

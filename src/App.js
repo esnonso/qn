@@ -55,7 +55,7 @@ const router = createBrowserRouter([
     element: <AdminPage />,
     children: [
       {
-        path: "/dashboard",
+        path: "posts",
         element: <CreatePosts />,
         action: storiesApiCalls,
       },

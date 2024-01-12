@@ -35,7 +35,7 @@ const AdminPortal = () => {
         loadingComplete(true);
       setName(data.name);
     });
-  }, [loading]);
+  },);
   return (
     <>
       <Header color="black" />
@@ -49,10 +49,11 @@ const AdminPortal = () => {
       )}
       <Container width="100%" height="110vh">
         <Container width="25%" color="black" height="100%" textColor="white">
-          <ul className="nav-admin">
-            <Link to="posts">
-              <li>Manage Posts</li>
-            </Link>
+          <ul style={{ marginTop: '50px' }} className="nav-admin">
+          <Link to="posts">
+            <li>Manage Posts</li>
+          </Link>
+
             <Link to="videos">
               <li>Manage Videos</li>
             </Link>

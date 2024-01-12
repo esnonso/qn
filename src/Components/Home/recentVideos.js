@@ -26,6 +26,7 @@ const PrintRecentVideos = ({ videos }) => {
     if (page === batch.length - 1) return;
     setPage((prevState) => prevState + 1);
   };
+  
 
   return (
     <div className="recent-cont-vids">
@@ -42,6 +43,7 @@ const PrintRecentVideos = ({ videos }) => {
             >
               <video controls autoPlay={false}>
                 <source src={i.videoUrl} type="video/mp4" />
+                <source src={i.videoUrl} type="video/ogg" />
                 {/* <source src="mov_bbb.ogg" type="video/ogg" /> */}
                 Your browser does not support HTML video.
               </video>

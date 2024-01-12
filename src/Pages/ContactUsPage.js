@@ -5,7 +5,7 @@ import "./contactuspage.css"
 export default function ContactUsPage() {
     return (
         <section>
-            <Header />
+            <Header color={"black"}/>
             <div className="contact-form">
                 <h2>Contact Us</h2>
                 <form>

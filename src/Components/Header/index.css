@@ -4,16 +4,16 @@ header {
     justify-content: space-between;
     padding: 0 2rem;  
     box-sizing: border-box;
-    height: 5rem;
+    height: 9rem;
     align-items: center;
     z-index: 2;
+
 }
 
 .logo {
-    transform: scale(2);
-    height:10rem;
-    width:10rem;
-    margin-left:2rem;
+    transform: scale(0.8);
+   
+    margin-left:-9rem;
 
 }
 
@@ -114,13 +114,12 @@ header h1{
 
 
 
-@media only screen and (min-width: 900px) {
+@media only screen and (max-width: 767px) {
     /* For Larger screens: */
    
     .logo {
-        height: 5rem;
-        width: 10rem;
-        margin-top: 1rem;
+       transform: scale(1.2);
+       margin-left: -2.5rem;
 
     }
 
