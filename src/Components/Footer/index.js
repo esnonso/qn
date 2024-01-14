@@ -4,37 +4,74 @@ import Twitter from "../../Images/twitter.png";
 import LinkedIn from "../../Images/linked.png";
 import Instagram from "../../Images/insta.png";
 
+
 const Footer = () => {
   const [showSubscribe, setShowSubscribe] = useState(false);
   const [email, setEmail] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const toggleSubscribe = () => {
     setShowSubscribe(!showSubscribe);
   };
 
-  const handleSubscribe = () => {
-    // Add logic here to handle the subscription, e.g., send email to server
-    console.log(`Subscribed with email: ${email}`);
+  const handleSubscribe = async () => {
+   
+  if (!email) {
+    setErrorMessage("Email is required.");
+    setSuccessMessage("");
+    return;
+  }
 
-    // You can also add more advanced logic, e.g., validate the email, show success/error messages, etc.
+
+    try {
+      const response = await fetch("https://formspree.io/f/mdoqkzvr", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email }),
+      });
+
+    
+
+      if (response.ok) {
+        // Show success message
+        setSuccessMessage("Thank you for subscribing!");
+        setErrorMessage(""); // Clear any previous error message
+      } else {
+        // Show error message
+        setErrorMessage("Error submitting subscription. Please try again");
+        setSuccessMessage(""); // Clear any previous success message
+      }
+    } catch (error) {
+      console.error("Error submitting subscription:", error);
+      setErrorMessage("Error submitting subscription. Please try again.");
+      setSuccessMessage("");
+    }
 
     // Clear the email input and hide the subscription input
     setEmail("");
     setShowSubscribe(false);
   };
 
+  // Rest of the component...
+
   return (
     <Container flex="column" color="black" textColor="white" align="center" height="200px">
+      {/* ... (rest of the component) */}
+
       <Container flex="column" justify="space-between" height="100%">
         {/* Toggled input for subscription */}
         {showSubscribe ? (
           <Container align="baseline" flexDirection="column">
-            <input
+          <input
               type="email"
               placeholder="Please Enter Your Email"
-              style={{ padding: "8px", marginBottom: "10px" }}
+            style={{ padding: "8px", marginBottom: "10px" }}
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              required
             />
             <button
               style={{ padding: "8px 20px", background: "#D1BB71", color: "black", border: "none", cursor: "pointer" }}
@@ -49,14 +86,20 @@ const Footer = () => {
               Subscribe to our newsletter
             </h4>
             <Container justify="center" padding="0 0 1rem 0">
-              <img src={Twitter} alt="Twitter" width="20px" height="20px" className="social" style={{ margin: "0 5px" }} />
+            <img src={Twitter} alt="Twitter" width="20px" height="20px" className="social" style={{ margin: "0 5px" }} />
               <img src={LinkedIn} alt="LinkedIn" width="20px" height="20px" className="social" style={{ margin: "0 5px" }} />
               <img src={Instagram} alt="Instagram" width="20px" height="20px" className="social" style={{ margin: "0 5px" }} />
+
             </Container>
           </>
         )}
 
-        <Container justify="space-around" fontSize="14px" style={{ marginTop: "40px", fontSize: "1px" }}>
+        {/* Display success or error messages */}
+        {successMessage && <small style={{ color: "green" }}>{successMessage}</small>}
+        {errorMessage && <small style={{ color: "red" }}>{errorMessage}</small>}
+
+       
+<Container justify="space-around" fontSize="14px" style={{ marginTop: "40px", fontSize: "1px" }}>
           &copy; Copyright {new Date().getFullYear()} Qn Legal
         </Container>
       </Container>
