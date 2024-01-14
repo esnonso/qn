@@ -19,7 +19,7 @@ const SinglePost = () => {
 
   const fetchSinglePost = useCallback(async () => {
     try {
-      const res = await fetch("http://localhost:5002/api/stories/" + params.id);
+      const res = await fetch("https://qnlegal-api-henry.onrender.com/api/stories/" + params.id);
       if (!res.ok) {
         const re = await res.json();
         throw new Error(re.message);

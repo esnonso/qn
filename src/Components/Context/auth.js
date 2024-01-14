@@ -5,33 +5,44 @@ const existingToken = localStorage.getItem("token");
 const defaultState = {
   token: existingToken === null ? "" : existingToken,
   login: () => {},
+  logout: () => {}, // Add logout function
 };
+
 export const AuthContext = createContext(defaultState);
 
-const loginReducer = (state, action) => {
+const authReducer = (state, action) => {
   switch (action.type) {
     case "LOGIN": {
       localStorage.setItem("token", action.token);
       return { token: action.token };
     }
+    case "LOGOUT": {
+      localStorage.removeItem("token");
+      return { token: "" };
+    }
     default:
-      return null;
+      return state;
   }
 };
 
 const AuthContextProvider = (props) => {
-  const [token, dispatch] = useReducer(
-    loginReducer,
-    existingToken === null ? "" : existingToken
+  const [state, dispatch] = useReducer(
+    authReducer,
+    existingToken === null ? { token: "" } : { token: existingToken }
   );
 
   const loginUser = (token) => {
     dispatch({ type: "LOGIN", token: token });
   };
 
+  const logoutUser = () => {
+    dispatch({ type: "LOGOUT" });
+  };
+
   const authCtx = {
-    token: token,
+    token: state.token,
     login: loginUser,
+    logout: logoutUser,
   };
 
   return (

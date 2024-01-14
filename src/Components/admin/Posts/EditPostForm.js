@@ -49,9 +49,7 @@ const EditPostForm = (props) => {
       <div className="form-control-post">
         <label>Topic</label>
         <select name="topic" value={topic} onChange={handleChange(setTopic)}>
-          <option>Poetry</option>
-          <option>Video</option>
-          <option>Movie</option>
+          <option>Legal Education</option>
         </select>
       </div>
 

@@ -11,7 +11,7 @@ export const storiesApiCalls = async ({ request }) => {
       const trending = formData.get("trending");
       try {
         const response = await fetch(
-          "http://localhost:5002/api/stories/" + id,
+          "https://qnlegal-api-henry.onrender.com/api/stories/" + id,
           {
             method: "PUT",
             headers: {

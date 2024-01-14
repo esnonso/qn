@@ -51,7 +51,7 @@ const ManageVideos = () => {
 
   const deleteProductHandler = async (id) => {
     try {
-      const response = await fetch("http://localhost:5002/api/videos/" + id, {
+      const response = await fetch("https://qnlegal-api-henry.onrender.com/api/videos/" + id, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",

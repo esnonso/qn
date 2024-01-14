@@ -28,7 +28,7 @@ const ViewUsers = () => {
 
   const deleteUserHandler = async (id) => {
     try {
-      const response = await fetch("http://localhost:5002/api/admins/" + id, {
+      const response = await fetch("https://qnlegal-api-henry.onrender.com/api/admins/" + id, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",

@@ -1,0 +1,15 @@
+/* Add this to your CSS file or style tag */
+.logout-button {
+    padding: 8px 16px;
+    background-color: #D1BB71;
+    color: black;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  
+  .logout-button:hover {
+    background-color: #A3925A;
+  }
+  
