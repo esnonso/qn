@@ -1,10 +1,5 @@
 import React, { useCallback, useEffect, useState } from "react";
-import {
-  useParams,
-  Form,
-  useActionData,
-  useNavigation,
-} from "react-router-dom";
+import { useParams, Form, useActionData, useNavigation } from "react-router-dom";
 import Header from "../Header";
 import Footer from "../Footer";
 import "./singlepost.css";
@@ -35,18 +30,10 @@ const SinglePost = () => {
     fetchSinglePost();
   }, [fetchSinglePost]);
 
-  const handleFacebookShare = () => {
- 
-    const url = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(`${post.title} - ${post.body}`)}`;
-    window.open(url, '_blank');
-  };
-  
   const handleTwitterShare = () => {
-  
     const url = `https://twitter.com/intent/tweet?url=${encodeURIComponent(window.location.href)}&text=${encodeURIComponent(`${post.title} - ${post.body}`)}`;
     window.open(url, '_blank');
   };
-  
 
   return (
     <>
@@ -68,7 +55,6 @@ const SinglePost = () => {
               post.comment &&
               post.comment.map((p, i) => (
                 <div key={i} className="comment-container">
-                
                   <img
                     src={p.createdBy.profileImage || Image}
                     alt="Profile"
@@ -85,8 +71,8 @@ const SinglePost = () => {
           {data && !data.error && (
             <small style={{ color: "green" }}>Success: {data.message}</small>
           )}
+
           <div className="social-share-buttons">
-            <button onClick={handleFacebookShare} className="social-share-button facebook-share-button">Share on Facebook</button>
             <button onClick={handleTwitterShare} className="social-share-button facebook-share-button">Share on Twitter</button>
           </div>
 
@@ -98,10 +84,13 @@ const SinglePost = () => {
               style={{ display: "none" }}
               readOnly
             />
-         
-            <textarea className="textarea" rows="4" type="text" placeholder="Write a comment..." name="comment"    >
-
-            </textarea>
+            <textarea
+              className="textarea"
+              rows="4"
+              type="text"
+              placeholder="Write a comment..."
+              name="comment"
+            ></textarea>
             <button
               type="submit"
               disabled={isSumbmitting}
