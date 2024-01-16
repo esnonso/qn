@@ -11,7 +11,7 @@ export const storiesApiCalls = async ({ request }) => {
       const trending = formData.get("trending");
       try {
         const response = await fetch(
-          "https://qnlegal-api-henry.onrender.com/api/stories/" + id,
+          "https://qnlegal-api-henrys.onrender.com/api/stories/" + id,
           {
             method: "PUT",
             headers: {
@@ -71,7 +71,7 @@ export const userApiCalls = async ({ request }) => {
       try {
         if (!terms)
           return { error: true, message: "Accept terms and condition" };
-        const response = await fetch("https://qnlegal-api-henry.onrender.com/auth/register", {
+        const response = await fetch("https://qnlegal-api-henrys.onrender.com/auth/register", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -100,7 +100,7 @@ export const loginUser = async ({ request }) => {
     const formData = await request.formData();
     const email = formData.get("email");
     const password = formData.get("password");
-    const response = await fetch("https://qnlegal-api-henry.onrender.com/auth/login", {
+    const response = await fetch("https://qnlegal-api-henrys.onrender.com/auth/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -119,7 +119,7 @@ export const loginUser = async ({ request }) => {
 
 export const fetchPosts = async () => {
   try {
-    const response = await fetch("https://qnlegal-api-henry.onrender.com/api/stories");
+    const response = await fetch("https://qnlegal-api-henrys.onrender.com/api/stories");
     if (!response.ok) throw new Error("An error occured getting posts");
     const data = await response.json();
     if (!response.ok) throw new Error("An error occured fetching posts");
@@ -131,7 +131,7 @@ export const fetchPosts = async () => {
 
 export const fetchVideos = async () => {
   try {
-    const response = await fetch("https://qnlegal-api-henry.onrender.com/api/videos");
+    const response = await fetch("https://qnlegal-api-henrys.onrender.com/api/videos");
     if (!response.ok) throw new Error("An error occured getting videos");
     const data = await response.json();
     return data.data;
@@ -150,7 +150,7 @@ export const videosApiCalls = async ({ request }) => {
       const topic = formData.get("topic");
       const id = formData.get("id");
       try {
-        const response = await fetch("https://qnlegal-api-henry.onrender.com/api/videos/" + id, {
+        const response = await fetch("https://qnlegal-api-henrys.onrender.com/api/videos/" + id, {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
@@ -189,7 +189,7 @@ export const fetchPostsAndVideos = async () => {
 
 export const fetchAdmins = async () => {
   try {
-    const response = await fetch("https://qnlegal-api-henry.onrender.com/api/admins", {
+    const response = await fetch("https://qnlegal-api-henrys.onrender.com/api/admins", {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
@@ -211,7 +211,7 @@ export const sendComments = async ({ request }) => {
   const comment = formData.get("comment");
   const id = formData.get("id");
   try {
-    const response = await fetch("https://qnlegal-api-henry.onrender.com/api/comments", {
+    const response = await fetch("https://qnlegal-api-henrys.onrender.com/api/comments", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

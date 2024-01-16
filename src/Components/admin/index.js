@@ -13,7 +13,7 @@ const AdminPortal = () => {
 
   const checkIfIsAdmin = async () => {
     try {
-      const res = await fetch("https://qnlegal-api-henry.onrender.com/api/profile", {
+      const res = await fetch("https://qnlegal-api-henrys.onrender.com/api/profile", {
         headers: {
           Authorization: `Bearer ${authCtx.token}`,
         },

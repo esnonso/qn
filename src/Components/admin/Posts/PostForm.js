@@ -38,7 +38,7 @@ const PostForm = (props) => {
     formData.append("trending", trending);
 
     try {
-      const response = await fetch("https://qnlegal-api-henry.onrender.com/api/stories", {
+      const response = await fetch("https://qnlegal-api-henrys.onrender.com/api/stories", {
         method: "POST",
         headers: {
           Authorization: `Bearer ${authCtx.token}`,

@@ -5,7 +5,7 @@ const existingToken = localStorage.getItem("token");
 const defaultState = {
   token: existingToken === null ? "" : existingToken,
   login: () => {},
-  logout: () => {}, // Add logout function
+  logout: () => {}, 
 };
 
 export const AuthContext = createContext(defaultState);

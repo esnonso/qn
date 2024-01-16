@@ -51,7 +51,7 @@ const CreatePosts = () => {
 
   const deleteProductHandler = async (id) => {
     try {
-      const response = await fetch(`https://qnlegal-api-henry.onrender.com/api/stories/${id}`, {
+      const response = await fetch(`https://qnlegal-api-henrys.onrender.com/api/stories/${id}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",

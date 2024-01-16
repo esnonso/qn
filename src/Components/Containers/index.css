@@ -16,7 +16,7 @@
     background-position: 100% 100%;
     background-repeat: no-repeat;
     background-blend-mode:multiply;
-    
+    background-position: 100% 100%;
 }
 
 .container{
@@ -34,7 +34,7 @@
     .cont {
         background-image: url("../../Images/pic.png");
         background-size: 50%;
-        background-position: 108% -10%;
+        background-position: 109% -30%;
     }
     .container-column {
         flex-direction: row;
