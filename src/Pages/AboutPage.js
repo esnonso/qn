@@ -12,9 +12,9 @@ const AboutPage = () => {
 
       <Container justify="center" flex="column" width="100%">
         <div className="pic">
-          <img src={Image} alt="" />
+          <img className="aboutimage"  src={Image} alt="" />
           <div className="about-text">
-           <H1Tags className="about-text" color="black" margin="5rem 0 0  0">
+           <H1Tags fontFamily="Bradon" className="about-text" color="black" margin="5rem 0 0  0">
               About Us
             </H1Tags>
 
@@ -75,51 +75,6 @@ const AboutPage = () => {
             Our vision is to make QN Legal a leading global provider of adequate, accessible, and affordable high
             quality legal education and legal services.
             </PTags>
-
-            <H1Tags color="black" margin="3rem 0 0 0">
-  What We Do
-</H1Tags>
-
-<PTags margin="0 0 1rem 0" color="black">
-  Legal Education: We provide educational services for individuals, businesses, and corporate institutions in various areas of law, including contract law, commercial law, company law, corporate social responsibility, employment law, and immigration law. Our services encompass individual and group seminars, specialized courses, and books.
-</PTags>
-
-<PTags margin="0 0 1rem 0" color="black">
-  Legal Consultation: Tailoring exclusive legal services to meet our clients’ needs, we offer one-on-one consultation services in contract law, commercial law, company law, corporate social responsibility, employment law, and immigration law.
-</PTags>
-
-
-            <H1Tags color="black" margin="3rem 0 0 0">
-              FAQ
-            </H1Tags>
-          <PTags margin="0 0 1rem 0" color="black">I have a legal dispute in court, can QN Legal represent me?</PTags> 
-           <PTags margin="0 0 1rem 0" color="black">No,QN legal does not make courtroom representations. However, we are happy to recommend
-            Barristers and Solicitors from our robust network.</PTags> 
-          <PTags  margin="0 0 1rem 0" color="black">Is QN Legal a Law Firm/Practice?</PTags>
-            No, QN Legal is not a Law firm. We are a Legal consulting and education consultancy service.. We
-            provide legal services that are not exclusively reserved for licenced legal professionals.
-
-        <H1Tags margin="3rem 0 0 0" color="black">
-              OUR SERVICES
-            </H1Tags>
-            <PTags margin="0 0 1rem 0">Courses - coming soon.</PTags>
-            <PTags margin="0 0 1rem 0">Books - coming soon</PTags>
-            <PTags margin="0 0 1rem 0">Legal Consultation - fill a form</PTags>
-             
-
-          <H1Tags margin="3rem 0 0 0" color="black">
-              RESOURCES
-            </H1Tags>
-            <PTags margin="0 0 1rem 0">Articles - coming soon.</PTags>
-            <PTags margin="0 0 1rem 0">Videos - coming soon</PTags>
-            <PTags margin="0 0 1rem 0">Newsletter - sign. Up for our newsletter</PTags>
-             <PTags margin="0 0 1rem 0">Work with Us - coming soon.</PTags>
-          <H1Tags margin="3rem 0 0 0" color="black">
-              CONTACT US
-            </H1Tags>
-            <PTags margin="0 0 1rem 0">Email: info@qnlegal.org</PTags>
-            <PTags margin="0 0 1rem 0">Telephone:</PTags>
-            <PTags margin="0 0 1rem 0">Follow us on socials:</PTags>
           </div>
         </div>
       </Container>

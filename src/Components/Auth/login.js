@@ -48,7 +48,7 @@ const LoginComponent = (props) => {
               disabled={isSumbmitting}
               className="submit-btn"
             >
-              {isSumbmitting ? "..." : "Login"}
+              {isSumbmitting ? "Login..." : "Login"}
             </button>
           </div>
         </Form>

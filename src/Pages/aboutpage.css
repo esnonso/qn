@@ -6,6 +6,16 @@
       align-items: center;
    
     }
+    .aboutimage{
+      /* max-width: 100%; 
+      margin-top: 1rem;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: -1;  */
+      display: none;
+    }
   
     .about-text {
       text-align: center;

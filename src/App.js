@@ -26,6 +26,13 @@ import {
   fetchAdmins,
   sendComments,
 } from "./Components/apiHandlers";
+import OurServicePage from "./Pages/OurServicePage";
+import FreeResourcesPage from "./Pages/FreeResourcesPage";
+import Faq from "./Pages/Faq";
+
+import Careers from "./Pages/Careers";
+
+
 
 const router = createBrowserRouter([
   {
@@ -35,6 +42,11 @@ const router = createBrowserRouter([
     errorElement: <ErrorModal />,
   },
   { path: "/aboutus", element: <AboutPage /> },
+  { path: "/ourservices", element: <OurServicePage /> },
+  { path: "/freeresources", element: <FreeResourcesPage /> },
+  { path: "/careers", element: <Careers/> },
+ 
+  { path: "/faq", element: <Faq/> },
   { path: "/contactus", element: <ContactUsPage /> },
   { path: "/post/:id", element: <SinglePost />, action: sendComments },
   {

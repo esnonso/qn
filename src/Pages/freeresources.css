@@ -1,0 +1,44 @@
+/* freeresources.css */
+
+.page-wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+  
+  .main-containers {
+    flex: 1;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .hero-sections {
+ 
+    color: #D1BB71;
+    padding: 1em;
+    text-align: center;
+  }
+  
+  .servicesButton {
+    background-color: black;
+    color:#D1BB71;
+    font-size: 16px;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 2px;
+  }
+  
+  .servicesButton:hover {
+    opacity: 0.4;
+  }
+  
+  .footer {
+    background-color: #333;
+    color: white;
+    padding: 1em;
+    text-align: center;
+    margin-top: auto;
+  }
+  

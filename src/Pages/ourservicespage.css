@@ -1,0 +1,67 @@
+/* Common styles for both desktop and mobile */
+.page-wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+  
+  .main-container {
+    flex: 1;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px; /* Reduced padding for better mobile experience */
+  }
+  
+  .hero-section {
+ 
+    color: #D1BB71;
+    padding: 1em;
+    text-align: center;
+  }
+  
+  .services-section {
+    margin-top: 20px;
+  }
+  
+  .service-description {
+    border: 1px solid #ddd;
+    padding: 20px;
+    background-color: white;
+  }
+  
+  .getStarted {
+    background-color: black;
+    color: #D1BB71;
+    font-size: 16px;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    margin-top: 20px; /* Adjusted margin for better spacing on mobile */
+    border-radius: 2px;
+    width: auto; /* Maintain a specific width for the button */
+  }
+  
+  .getStarted:hover {
+    opacity: 0.8; /* Adjusted opacity for better visual feedback */
+  }
+  
+  .footer {
+    background-color: #333;
+    color: white;
+    padding: 1em;
+    text-align: center;
+    margin-top: 50px; /* Adjust the top margin as needed */
+    margin-bottom: auto;
+  }
+  
+  /* Responsive styles for mobile */
+  @media only screen and (max-width: 767px) {
+    .main-container {
+      padding: 20px; /* Reduced padding for better mobile experience */
+    }
+  
+    .getStarted {
+      margin-left: 0; /* Center the button on mobile */
+    }
+  }
+  

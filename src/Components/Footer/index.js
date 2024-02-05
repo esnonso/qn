@@ -82,15 +82,10 @@ const Footer = () => {
           </Container>
         ) : (
           <>
-            <h4 style={{ color: "#D1BB71", cursor: "pointer", textDecoration: "none" }} onClick={toggleSubscribe}>
+            <h4 style={{ color: "#D1BB71", textAlign:"center", cursor: "pointer", textDecoration: "none" }} onClick={toggleSubscribe}>
               Subscribe to our newsletter
             </h4>
-            <Container justify="center" padding="0 0 1rem 0">
-            <img src={Twitter} alt="Twitter" width="20px" height="20px" className="social" style={{ margin: "0 5px" }} />
-              <img src={LinkedIn} alt="LinkedIn" width="20px" height="20px" className="social" style={{ margin: "0 5px" }} />
-              <img src={Instagram} alt="Instagram" width="20px" height="20px" className="social" style={{ margin: "0 5px" }} />
-
-            </Container>
+         
           </>
         )}
 
@@ -98,9 +93,22 @@ const Footer = () => {
         {successMessage && <small style={{ color: "green" }}>{successMessage}</small>}
         {errorMessage && <small style={{ color: "red" }}>{errorMessage}</small>}
 
+
+        <Container justify="center" padding="0 0 1rem 0">
+            <img src={Twitter} alt="Twitter" width="20px" height="20px" className="social" style={{ margin: "0 5px" }} />
+              <img src={LinkedIn} alt="LinkedIn" width="20px" height="20px" className="social" style={{ margin: "0 5px" }} />
+              <img src={Instagram} alt="Instagram" width="20px" height="20px" className="social" style={{ margin: "0 5px" }} />
+
+            </Container>
+
+            <h4 style={{ textAlign: "center", color: "#D1BB71", fontSize:"12px", cursor: "pointer", textDecoration: "none" }} >
+              Contact Us: info@qnlegal.org
+            </h4>
+
+
        
-<Container justify="space-around" fontSize="14px" style={{ marginTop: "40px", fontSize: "1px" }}>
-          &copy; Copyright {new Date().getFullYear()} Qn Legal
+<Container justify="space-around" fontSize="6px" style={{ marginTop: "40px", fontSize: "1px" }}>
+          &copy; Copyright {new Date().getFullYear()} Qn Legal 
         </Container>
       </Container>
     </Container>

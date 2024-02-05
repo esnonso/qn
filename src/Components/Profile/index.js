@@ -48,7 +48,7 @@ export default function UserProfile() {
       <Container width="100%" flex="column" padding="1rem">
         <img src={Image} alt="default-profile" style={imgStyles} />
         <PTags>Name: {user.name}</PTags>
-        <PTags>Email: {user.email}</PTags>
+        {/* <PTags>Email: {user.email}</PTags> */}
         <PTags>Joined: {user.joined}</PTags>
         {user.role === "admin" ||
           (user.role === "Administrator" && (
