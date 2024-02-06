@@ -87,7 +87,7 @@ const PrintTrendingPosts = ({ posts }) => {
                         alt="Profile"
                         className="profile"
                       />
-                      <span className="username">{user.name}</span>
+                      <span className="username">by Queen Nwosu</span>
                     </div>
   {/* <div className="calendar-info">
     <img

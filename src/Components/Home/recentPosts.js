@@ -86,7 +86,7 @@ const PrintRecentPosts = ({ posts }) => {
     height="15"
     style={{ borderRadius: '50%', marginRight: '10px' }}
   />
-    {user.name}
+   by Queen Nwosu
     </PTags>
                 <p>
                   {i.body.slice(0, 160)}...{" "}
