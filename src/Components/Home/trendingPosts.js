@@ -81,14 +81,13 @@ const PrintTrendingPosts = ({ posts }) => {
                   </Link>
                 </div>
                 <div className="flex-profile">
-                    <div className="profile-info">
-                      <img
+                   <img
                         src={require("../../Images/profile.png")}
                         alt="Profile"
                         className="profile"
                       />
-                      <span className="username">by Queen Nwosu</span>
-                    </div>
+                      <p className="username">by Queen Nwosu</p> 
+                </div>
   {/* <div className="calendar-info">
     <img
       src={require("../../Images/calender.png")}
@@ -97,7 +96,7 @@ const PrintTrendingPosts = ({ posts }) => {
     />
     <span>{item.createdAt}</span>
   </div> */}
-</div>
+
 
                 
                 

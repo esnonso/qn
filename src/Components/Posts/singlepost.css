@@ -329,18 +329,7 @@ margin-top:80px;
   
 
 
-.textarea {
-    width: 100%;
-    padding: 10px;
-    border-radius: 5px;
-    border: 1px solid #e0e0e0;
-    outline: none;
-    color: #444;
-    line-height: 1.5rem;
-    font-size: 1.4em;
-    font-family: 'lora', serif;
-    resize: vertical;
-  }
+
   
  
   .textarea:focus {
@@ -403,11 +392,25 @@ margin-top:80px;
   
   
 
-  @media only screen and (max-width: 600px) {
+  .textarea {
+    width: calc(100% - 110px); /* Adjust the button width as per your design */
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #e0e0e0;
+    outline: none;
+    color: #444;
+    line-height: 1.5rem;
+    font-size: 1.4em;
+    font-family: 'lora', serif;
+    resize: vertical;
+  }
+  
+  @media screen and (max-width: 767px) {
     .textarea {
-      width: 100%; 
+      width: calc(100% - 20px); /* Adjust the button width as per your design */
     }
   }
+  
   
 
 

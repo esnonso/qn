@@ -15,8 +15,8 @@ import Loader from "./Loader";
 const Homepage = () => {
   const data = useLoaderData();
 
-  // Show loader while data is being fetched
-  if (!data) {
+   // Show loader while specific data is being fetched
+   if (!data.posts || !data.videos) {
     return <Loader />;
   }
 

@@ -42,7 +42,8 @@
   .flex-profile {
     display: flex;
     align-items: center;
-    margin-top: 10px;
+    margin-top: 2px;
+   
   }
   
   .profile {
@@ -54,9 +55,8 @@
   }
   
   .username {
-    font-size: 16px;
-   
-  }
+    font-size: 14px;
+    }
   
   /* Media query for mobile devices */
   @media screen and (max-width: 768px) {
