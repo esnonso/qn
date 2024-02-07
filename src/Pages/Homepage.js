@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useLoaderData } from "react-router-dom";
 import ContainerBanner from "../Components/Containers/container-banner";
 import Container from "../Components/Containers/container";
@@ -10,20 +10,27 @@ import PrintTrendingVideos from "../Components/Home/trendingVideos";
 import PrintRecentPosts from "../Components/Home/recentPosts";
 import PrintRecentVideos from "../Components/Home/recentVideos";
 import Footer from "../Components/Footer";
-import Loader from "./Loader";
 
 const Homepage = () => {
+  const [loading, setLoading] = useState(true); 
   const data = useLoaderData();
 
-   // Show loader while specific data is being fetched
-   if (!data.posts || !data.videos) {
-    return <Loader />;
-  }
-
+  useEffect(() => {
+  
+    setLoading(false);
+  }, []); 
   return (
     <>
       <ContainerBanner>
       <Header color={"black"} />
+        {loading && ( 
+          <div className="loader-container">
+            <span className="loader"></span>
+            <p style={{ width: "fit-content", fontSize: "larger" }}>
+              Loading content...
+            </p>
+          </div>
+        )}
         <Container
           height="70vh"
           textColor="white"

@@ -16,17 +16,17 @@ const PrintRecentVideos = ({ videos }) => {
     if (videos) {
       putVideosInBatches();
     }
-  }, []);
+  }, [videos]);
 
   const decreasePageHandler = () => {
     if (page === 0) return;
     setPage((prevState) => prevState - 1);
   };
+
   const increasePageHandler = () => {
     if (page === batch.length - 1) return;
     setPage((prevState) => prevState + 1);
   };
-  
 
   return (
     <div className="recent-cont-vids">
@@ -56,39 +56,41 @@ const PrintRecentVideos = ({ videos }) => {
             </Container>
           ))}
       </Container>
-      <Container width="100%" justify="center">
-        <Button
-          text="Previous"
-          back="black"
-          color="#D1BB71"
-          font="large"
-          borderRadius={"5px"}
-          margin={"0 0.2rem 0 0"}
-          width="6rem"
-          click={decreasePageHandler}
-        />
-        {batch.map((b, i) => (
+      {videos.length >= 10 && ( // Conditionally render pagination buttons
+        <Container width="100%" justify="center">
           <Button
-            text={i + 1}
-            key={i}
+            text="Previous"
             back="black"
             color="#D1BB71"
             font="large"
-            borderRadius={"5px"}
-            margin={"0 0.2rem 0 0"}
+            borderRadius="5px"
+            margin="0 0.2rem 0 0"
+            width="6rem"
+            click={decreasePageHandler}
           />
-        ))}
-        <Button
-          text="Next"
-          back="black"
-          color="#D1BB71"
-          font="large"
-          borderRadius={"5px"}
-          margin={"0 0.2rem 0 0"}
-          width="6rem"
-          click={increasePageHandler}
-        />
-      </Container>
+          {batch.map((b, i) => (
+            <Button
+              text={i + 1}
+              key={i}
+              back="black"
+              color="#D1BB71"
+              font="large"
+              borderRadius="5px"
+              margin="0 0.2rem 0 0"
+            />
+          ))}
+          <Button
+            text="Next"
+            back="black"
+            color="#D1BB71"
+            font="large"
+            borderRadius="5px"
+            margin="0 0.2rem 0 0"
+            width="6rem"
+            click={increasePageHandler}
+          />
+        </Container>
+      )}
     </div>
   );
 };

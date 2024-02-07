@@ -42,9 +42,7 @@
   .flex-profile {
     display: flex;
     align-items: center;
-    margin-top: 2px;
-   
-  }
+   }
   
   .profile {
     width: 16px;
@@ -61,7 +59,7 @@
   /* Media query for mobile devices */
   @media screen and (max-width: 768px) {
     .post-container {
-      width: calc(60% - 40px);
+      width: 100%;
     }
   
     .username {

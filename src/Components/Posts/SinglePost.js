@@ -43,7 +43,11 @@ const SinglePost = () => {
           <div className="main-content-wrapper">
             <div className="main-content single">
               <h1 className="post-title">{post.title}</h1>
-              <div className="post-content">{post.body}</div>
+              <div className="post-content">
+              {post.body && post.body.split('\n').map((paragraph, index) => (
+              <p key={index}>{paragraph}</p>
+            ))}
+              </div>
             </div>
           </div>
         </div>
@@ -90,6 +94,7 @@ const SinglePost = () => {
               type="text"
               placeholder="Write a comment..."
               name="comment"
+              required
             ></textarea>
             <button
               type="submit"

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom"; 
 import MobileNavigation from "../MobileNavigator";
 import "./index.css";
 
@@ -15,14 +16,14 @@ const Header = ({ textColor, list, color, position, image }) => {
   };
   return (
     <header style={headerStyles}>
-      {/* {logo !== "" && <h1>{logo}</h1>} */}
+      {/* Make the logo clickable and navigate to the home page */}
       {image !== "" && (
-        <img src={require("../../Images/logo.png")} alt="" className="logo" />
+        <Link to="/">
+          <img src={require("../../Images/logo.png")} alt="" className="logo" />
+        </Link>
       )}
-      <div
-        style={{ width: "50%", display: "flex", justifyContent: "flex-end" }}
-      >
-        <button className="hamburger" onClick={showSideBarHandler}>
+      <div className="hamburger-container" onClick={showSideBarHandler}>
+        <button className="hamburger">
           <span></span>
           <span></span>
           <span></span>

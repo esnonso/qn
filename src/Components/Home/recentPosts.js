@@ -8,11 +8,11 @@ import { AuthContext } from "../Context/auth";
 import { paginate } from "../Functions";
 import Image from "../../Images/default-profile.png";
 
-
-
 const PrintRecentPosts = ({ posts }) => {
   const [page, setPage] = useState(0);
   const [batch, setBatch] = useState([]);
+  const [user, setUser] = useState({});
+  const authCtx = useContext(AuthContext);
 
   const putPostsInBatches = async () => {
     setBatch(paginate(posts));
@@ -22,18 +22,22 @@ const PrintRecentPosts = ({ posts }) => {
     if (posts) {
       putPostsInBatches();
     }
+  }, [posts]);
+
+  useEffect(() => {
+    fetchUserProfile();
   }, []);
 
   const decreasePageHandler = () => {
     if (page === 0) return;
     setPage((prevState) => prevState - 1);
   };
+
   const increasePageHandler = () => {
     if (page === batch.length - 1) return;
     setPage((prevState) => prevState + 1);
   };
-  const [user, setUser] = useState({});
-  const authCtx = useContext(AuthContext);
+
   const fetchUserProfile = async () => {
     try {
       const res = await fetch("https://qnlegal-api-henrys.onrender.com/api/profile", {
@@ -51,12 +55,6 @@ const PrintRecentPosts = ({ posts }) => {
       console.log(err);
     }
   };
-
-  useEffect(() => {
-    fetchUserProfile();
-  }, []);
-
-
 
   return (
     <div className="recent-cont-posts">
@@ -78,60 +76,62 @@ const PrintRecentPosts = ({ posts }) => {
                   <b>{i.title}</b>
                 </PTags>
                 
-  <PTags>
-  <img
-    src={user.imageUrl || Image}
-    alt="User Avatar"
-    width="15"
-    height="15"
-    style={{ borderRadius: '50%', marginRight: '10px' }}
-  />
-   by Queen Nwosu
-    </PTags>
+                <PTags>
+                  <img
+                    src={user.imageUrl || Image}
+                    alt="User Avatar"
+                    width="15"
+                    height="15"
+                    style={{ borderRadius: '50%', marginRight: '10px' }}
+                  />
+                  by Queen Nwosu
+                </PTags>
+                
                 <p>
                   {i.body.slice(0, 160)}...{" "}
                   <Link to={`/post/${i._id}`} className="btn">
                     Read more
                   </Link>
                 </p>
-                
               </Container>
             </ContainerFlexColumn>
           ))}
       </Container>
-      <Container width="100%" justify="center">
-        <Button
-          text="Previous"
-          back="black"
-          color="#D1BB71"
-          font="large"
-          borderRadius={"5px"}
-          margin={"0 0.2rem 0 0"}
-          width="6rem"
-          click={decreasePageHandler}
-        />
-        {batch.map((b, i) => (
+      {posts.length >= 10 && ( // Conditionally render pagination buttons
+        <Container width="100%" justify="center">
           <Button
-            text={i + 1}
-            key={i}
+            text="Previous"
             back="black"
             color="#D1BB71"
             font="large"
-            borderRadius={"5px"}
-            margin={"0 0.2rem 0 0"}
+            borderRadius="5px"
+            margin="0 0.2rem 0 0"
+            width="6rem"
+            click={decreasePageHandler}
           />
-        ))}
-        <Button
-          text="Next"
-          back="black"
-          color="#D1BB71"
-          font="large"
-          borderRadius={"5px"}
-          margin={"0 0.2rem 0 0"}
-          width="6rem"
-          click={increasePageHandler}
-        />
-      </Container>
+          {batch.map((b, i) => (
+            <Button
+              text={i + 1}
+              key={i}
+              back="black"
+              color="#D1BB71"
+              font="large"
+              borderRadius="5px"
+              margin="0 0.2rem 0 0"
+            />
+          ))}
+          <Button
+            text="Next"
+            back="black"
+            color="#D1BB71"
+            font="large"
+            borderRadius="5px"
+            margin="0 0.2rem 0 0"
+            width="6rem"
+            click={increasePageHandler}
+          />
+        </Container>
+      )}
     </div>
   );
 };
